@@ -881,9 +881,22 @@ input:focus, select:focus, textarea:focus {
 
 /* Logo Image Control */
 .logo-img {
-  width: 140px !important; /* Logo pequeño y forzar prioridad */
+  width: 160px !important;
   height: auto !important;
   max-width: none !important;
   min-width: 0 !important;
   display: inline-block;
+  position: relative;
+  z-index: 10;
+  top: 5px;
+}
+
+/* Permitir que el logo se desborde sin afectar el navbar */
+.navbar-brand {
+  overflow: visible !important;
+  position: relative;
+}
+
+.main-navigation {
+  overflow: visible !important;
 }

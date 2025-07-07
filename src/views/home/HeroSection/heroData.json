@@ -1,0 +1,30 @@
+{
+  "buttons": {
+    "aboutMore": "Saber Más",
+    "learnMore": "Explorar Autos"
+  },
+  "routes": {
+    "about": "/about",
+    "cars": "/cars"
+  },
+  "slides": [
+    {
+      "image": "/assets/img/slider/slider-1.jpg",
+      "subtitle": "Encuentra tu Auto Ideal",
+      "title": "Subastas de Vehículos <span>Premium</span>",
+      "description": "Descubre miles de vehículos de calidad en nuestras subastas en línea. Los mejores precios, la mayor variedad y la confianza que necesitas para tu próxima compra."
+    },
+    {
+      "image": "/assets/img/slider/slider-2.jpg",
+      "subtitle": "Mejores Precios Garantizados",
+      "title": "Compra y Vende con <span>Confianza</span>",
+      "description": "Nuestra plataforma te ofrece seguridad y transparencia en cada transacción. Participa en subastas en tiempo real y encuentra el vehículo perfecto para ti."
+    },
+    {
+      "image": "/assets/img/slider/slider-3.jpg",
+      "subtitle": "Subastas en Tiempo Real",
+      "title": "La Mejor Experiencia de <span>Compra</span>",
+      "description": "Únete a nuestra comunidad de compradores y vendedores. Accede a un catálogo exclusivo de vehículos verificados y certificados por nuestros expertos."
+    }
+  ]
+}

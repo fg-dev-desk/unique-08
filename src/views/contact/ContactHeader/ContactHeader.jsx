@@ -1,26 +1,12 @@
 import React from 'react';
 
-// data
-const contactHeaderData = {
-  sectionTitle: {
-    tagline: "Contacto",
-    title: "Conecta con",
-    titleSpan: "Nosotros",
-    description: "¿Tienes alguna pregunta sobre nuestras subastas de vehículos? Nuestro equipo de expertos está aquí para ayudarte a encontrar el vehículo perfecto a través de nuestras subastas online seguras y confiables."
-  }
-};
-
-// styles
-const contactHeaderStyles = {
-  sectionContainer: {
-    background: 'linear-gradient(135deg, #f8f9ff 0%, #f1f4ff 100%)'
-  }
-};
+import { useContactHeader } from './useContactHeader';
 
 const ContactHeader = () => {
-  // render
+  const { contactHeaderHelpers, contactHeaderData } = useContactHeader();
+
   return (
-    <div className="contact-header-area bg py-120" style={contactHeaderStyles.sectionContainer}>
+    <div className="contact-header-area bg py-120" style={contactHeaderHelpers.getSectionStyle()}>
       <div className="container">
         <div className="row">
           <div className="col-lg-8 mx-auto">
