@@ -50,7 +50,7 @@ const heroStyles = {
   heroSubtitle: {
     fontSize: '1.2rem',
     fontWeight: '600',
-    color: '#ffb300',
+    color: '#ffffff',
     marginBottom: '1rem',
     textTransform: 'uppercase',
     letterSpacing: '1px'
