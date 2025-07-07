@@ -2,9 +2,9 @@ import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { startGetFeaturedCars, startSearchCars } from '../../../redux/features/home/thunks';
-import { setSortBy } from '../../../redux/features/home/homeSlice';
+import { setSortBy, setSearchQuery } from '../../../redux/features/home/homeSlice';
 
-import { carData } from './carData';
+import carAreaData from './carAreaData.json';
 
 export const useCarArea = (scope = 'main') => {
   const dispatch = useDispatch();
@@ -30,10 +30,10 @@ export const useCarArea = (scope = 'main') => {
   }, []);
 
   // helpers
-  const carHelpers = {
+  const carAreaHelpers = {
     getCarImage: (car) => {
       if (car.urlImgPrincipal) return car.urlImgPrincipal;
-      return carData.defaults.image;
+      return carAreaData.defaults.image;
     },
 
     getTimeLeft: (fechaFin) => {
@@ -80,7 +80,35 @@ export const useCarArea = (scope = 'main') => {
     },
 
     formatPrice: (price) => {
-      return price ? `$${Number(price).toLocaleString('en-US')}` : carData.defaults.price;
+      return price ? `$${Number(price).toLocaleString('en-US')}` : carAreaData.defaults.price;
+    },
+
+    getCarName: (car) => {
+      return car.nombre || car.name || 'Vehicle';
+    },
+
+    getCarModel: (car) => {
+      return car.modelo || car.modeloAnio || 'N/A';
+    },
+
+    getCarCapacity: (car) => {
+      return car.capacidad || carAreaData.defaults.capacity;
+    },
+
+    getCarFuel: (car) => {
+      return car.tipoCombustible || carAreaData.defaults.fuel;
+    },
+
+    getCarEfficiency: (car) => {
+      return car.rendimiento || carAreaData.defaults.efficiency;
+    },
+
+    getCarTransmission: (car) => {
+      return car.transmision || carAreaData.defaults.transmission;
+    },
+
+    getCarLink: (car) => {
+      return `/subasta/${car.torreID || car.id}`;
     }
   };
 
@@ -109,11 +137,17 @@ export const useCarArea = (scope = 'main') => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    dispatch(setSearchQuery(e.target.value));
+  };
+
   return {
-    carHelpers,
+    carAreaHelpers,
+    carAreaData,
     handleSearchSubmit,
     handleSortChange,
     handleLoadMore,
+    handleSearchChange,
     loading,
     error,
     featuredCars,
@@ -122,4 +156,3 @@ export const useCarArea = (scope = 'main') => {
     pagination
   };
 };
-  

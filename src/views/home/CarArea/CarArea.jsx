@@ -1,20 +1,19 @@
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
-import { setSearchQuery } from '../../../redux/features/home/homeSlice';
 import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { AuctionStatus } from '../../../components/ui/AuctionStatus';
 
-import { carData } from './carData';
 import { useCarArea } from './useCarArea';
-
+import './carAreaStyles.css';
 
 export const CarArea = ({ scope = 'main' }) => {
-  const dispatch = useDispatch();
   const {
-    carHelpers,
+    carAreaHelpers,
+    carAreaData,
     handleSearchSubmit,
     handleSortChange,
     handleLoadMore,
+    handleSearchChange,
     loading,
     error,
     featuredCars,
@@ -22,7 +21,7 @@ export const CarArea = ({ scope = 'main' }) => {
     searchQuery
   } = useCarArea(scope);
 
-  if (loading) return <div className="text-center py-5">{carData.messages.loading}</div>;
+  if (loading) return <div className="text-center py-5">{carAreaData.messages.loading}</div>;
   if (error) return <div className="text-center py-5 text-danger">{error}</div>;
   
   return (
@@ -31,9 +30,9 @@ export const CarArea = ({ scope = 'main' }) => {
         <div className="row">
           <div className="col-lg-6 mx-auto">
             <div className="site-heading text-center">
-              <span className="site-title-tagline">{carData.sectionTitle.tagline}</span>
+              <span className="site-title-tagline">{carAreaData.sectionTitle.tagline}</span>
               <h2 className="site-title">
-                {carData.sectionTitle.title} <span>{carData.sectionTitle.titleSpan}</span>
+                {carAreaData.sectionTitle.title} <span>{carAreaData.sectionTitle.titleSpan}</span>
               </h2>
               <div className="heading-divider"></div>
             </div>
@@ -50,9 +49,9 @@ export const CarArea = ({ scope = 'main' }) => {
                     <input 
                       type="text" 
                       className="form-control" 
-                      placeholder={carData.searchPlaceholder}
+                      placeholder={carAreaData.searchPlaceholder}
                       value={searchQuery} 
-                      onChange={e => dispatch(setSearchQuery(e.target.value))} 
+                      onChange={handleSearchChange} 
                     />
                     <button type="search">
                       <i className="far fa-search"></i>
@@ -67,7 +66,7 @@ export const CarArea = ({ scope = 'main' }) => {
                 value={sortBy} 
                 onChange={handleSortChange}
               >
-                {carData.sortOptions.map(option => (
+                {carAreaData.sortOptions.map(option => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -84,38 +83,38 @@ export const CarArea = ({ scope = 'main' }) => {
               <div key={car.torreID || car.id} className="col-lg-6 col-xl-4">
                 <div className="car-item position-relative">
                   {/* Status badge - esquina superior izquierda */}
-                  <AuctionStatus isActive={carHelpers.isAuctionActive(car)} />
+                  <AuctionStatus isActive={carAreaHelpers.isAuctionActive(car)} />
                   
                   {/* Timer badge - esquina superior derecha */}
-                  {carHelpers.getAuctionEndDate(car) && carHelpers.isAuctionActive(car) && (
-                    <AuctionTimer endDate={carHelpers.getAuctionEndDate(car)} />
+                  {carAreaHelpers.getAuctionEndDate(car) && carAreaHelpers.isAuctionActive(car) && (
+                    <AuctionTimer endDate={carAreaHelpers.getAuctionEndDate(car)} />
                   )}
                   
                   <div className="car-img">
                     <img 
-                      src={carHelpers.getCarImage(car)} 
-                      alt={car.nombre || car.name || 'Car'} 
+                      src={carAreaHelpers.getCarImage(car)} 
+                      alt={carAreaHelpers.getCarName(car)} 
                     />
                   </div>
                   <div className="car-content">
                     <div className="car-top">
-                      <h4><a href="#">{car.nombre || car.name || 'Vehicle'}</a></h4>
-                      <span><i className="fas fa-star"></i> {carData.defaults.rating}</span>
+                      <h4><a href="#">{carAreaHelpers.getCarName(car)}</a></h4>
+                      <span><i className="fas fa-star"></i> {carAreaData.defaults.rating}</span>
                     </div>
                     <ul className="car-list">
-                      <li><i className="far fa-car"></i>{carData.labels.model}: {car.modelo || car.modeloAnio || 'N/A'}</li>
-                      <li><i className="far fa-user-tie"></i>{car.capacidad || carData.defaults.capacity} {carData.labels.people}</li>
-                      <li><i className="far fa-gas-pump"></i>{car.tipoCombustible || carData.defaults.fuel}</li>
-                      <li><i className="far fa-road"></i>{car.rendimiento || carData.defaults.efficiency}</li>
-                      <li><i className="far fa-steering-wheel"></i>{car.transmision || carData.defaults.transmission}</li>
+                      <li><i className="far fa-car"></i>{carAreaData.labels.model}: {carAreaHelpers.getCarModel(car)}</li>
+                      <li><i className="far fa-user-tie"></i>{carAreaHelpers.getCarCapacity(car)} {carAreaData.labels.people}</li>
+                      <li><i className="far fa-gas-pump"></i>{carAreaHelpers.getCarFuel(car)}</li>
+                      <li><i className="far fa-road"></i>{carAreaHelpers.getCarEfficiency(car)}</li>
+                      <li><i className="far fa-steering-wheel"></i>{carAreaHelpers.getCarTransmission(car)}</li>
                     </ul>
                     <div className="car-footer">
                       <span className="car-price">
-                        {carHelpers.formatPrice(car.precio)} 
-                        <sub>{carData.labels.perMonth}</sub>
+                        {carAreaHelpers.formatPrice(car.precio)} 
+                        <sub>{carAreaData.labels.perMonth}</sub>
                       </span>
                       <a href="#" className="car-favorite-btn"><i className="far fa-heart"></i></a>
-                      <a href={`/subasta/${car.torreID || car.id}`} className="theme-btn">{carData.labels.rentNow}</a>
+                      <a href={carAreaHelpers.getCarLink(car)} className="theme-btn">{carAreaData.labels.rentNow}</a>
                     </div>
                   </div>
                 </div>
@@ -123,14 +122,14 @@ export const CarArea = ({ scope = 'main' }) => {
             ))
           ) : (
             <div className="col-12 text-center">
-              <div className="alert alert-info">{carData.messages.noResults}</div>
+              <div className="alert alert-info">{carAreaData.messages.noResults}</div>
             </div>
           )}
         </div>
         
         <div className="text-center mt-4">
           <a href="#" className="theme-btn" onClick={handleLoadMore}>
-            {carData.labels.loadMore} <i className="far fa-arrow-rotate-right"></i>
+            {carAreaData.labels.loadMore} <i className="far fa-arrow-rotate-right"></i>
           </a>
         </div>
       </div>

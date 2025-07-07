@@ -1,0 +1,48 @@
+/* CarArea Component Styles */
+.car-section-container {
+  padding: 120px 0;
+}
+
+.car-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.car-search-input {
+  padding: 12px 45px 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 250px;
+}
+
+.car-search-button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+.car-sort-select {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+/* Car Item Position Fix */
+.car-item.position-relative {
+  overflow: hidden;
+}
+
+.car-item .car-img {
+  position: relative;
+}

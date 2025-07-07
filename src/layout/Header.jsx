@@ -38,7 +38,7 @@ const Header = () => {
                       <img src="/assets/img/icon/mail.svg" alt="" />
                     </div>
                     <div className="header-top-contact-info">
-                      <a href="mailto:info@uniquemotors.com">info@uniquemotors.com</a>
+                      <a href="mailto:info@uniquemotors.com">info@uniquemotors.mx</a>
                     </div>
                   </li>
                   <li>
@@ -139,7 +139,7 @@ const Header = () => {
                   </div>
                   <div className="header-phone-content">
                     <span>¿Necesitas Subastar tu Auto?</span>
-                    <h5 className="header-phone-number"><a href="tel:+2123654789">+2 123 654 789</a></h5>
+                    <h5 className="header-phone-number"><a href="tel:+2123654789">+52 55 37 89 41 66</a></h5>
                   </div>
                 </div>
                 <div className="header-btn mt-2">
