@@ -1,35 +1,35 @@
 export const carData = {
   
   sectionTitle: {
-    tagline: "Cars",
-    title: "Featured",
-    titleSpan: "Cars"
+    tagline: "Autos",
+    title: "Vehículos",
+    titleSpan: "Destacados"
   },
-  searchPlaceholder: "Search",
+  searchPlaceholder: "Buscar",
   sortOptions: [
-    { value: "1", label: "Sort By Default" },
-    { value: "5", label: "Sort By Featured" },
-    { value: "2", label: "Sort By Latest" },
-    { value: "3", label: "Sort By Low Price" },
-    { value: "4", label: "Sort By High Price" }
+    { value: "1", label: "Ordenar por Defecto" },
+    { value: "5", label: "Ordenar por Destacados" },
+    { value: "2", label: "Ordenar por Más Recientes" },
+    { value: "3", label: "Ordenar por Precio Bajo" },
+    { value: "4", label: "Ordenar por Precio Alto" }
   ],
   labels: {
-    model: "Model",
-    people: "People",
-    perMonth: "/ month",
-    loadMore: "Load More",
+    model: "Modelo",
+    people: "Personas",
+    perMonth: "/ mes",
+    loadMore: "Cargar Más",
     rentNow: "Ver Subasta"
   },
   messages: {
-    loading: "Loading cars...",
-    noResults: "No cars found."
+    loading: "Cargando autos...",
+    noResults: "No se encontraron autos."
   },
   defaults: {
     image: '/assets/img/car/01.jpg',
     capacity: '4',
-    fuel: 'Hybrid',
-    efficiency: '10.15km / 1-litre',
-    transmission: 'Automatic',
+    fuel: 'Híbrido',
+    efficiency: '10.15km / 1-litro',
+    transmission: 'Automático',
     price: '$390',
     rating: '5.0'
   }

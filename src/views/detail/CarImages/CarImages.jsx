@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useCarDetail } from '../hooks/useCarDetail';
+import { AuctionTimer } from '../../../components/ui/AuctionTimer';
+import { AuctionStatus } from '../../../components/ui/AuctionStatus';
 
 const CarImages = () => {
   // hooks
@@ -122,10 +124,32 @@ const CarImages = () => {
     });
   };
 
+  // Funciones helper para el estado de subasta
+  const isAuctionActive = () => {
+    if (car.fechaFin) {
+      const end = new Date(car.fechaFin);
+      return end > new Date();
+    }
+    if (car.activo !== undefined) return car.activo;
+    return false;
+  };
+
+  const getAuctionEndDate = () => {
+    return car.fechaFin || car.fechaVencimiento;
+  };
+
   return (
     <>
       <div className="col-lg-8">
-        <div className="car-single-slider-box">
+        <div className="car-single-slider-box position-relative">
+          {/* Status badge - esquina superior izquierda */}
+          <AuctionStatus isActive={isAuctionActive()} />
+          
+          {/* Timer badge - esquina superior derecha */}
+          {getAuctionEndDate() && isAuctionActive() && (
+            <AuctionTimer endDate={getAuctionEndDate()} />
+          )}
+          
           <div className="car-single-slider owl-carousel owl-theme" ref={sliderRef}>
             {car.imagenes && car.imagenes.map(img => (
               <div key={img.articuloDocumentoID}>

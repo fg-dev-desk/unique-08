@@ -647,51 +647,7 @@ input:focus, select:focus, textarea:focus {
   background: linear-gradient(to bottom, #1e3a8a, #1d4ed8);
 }
 
-/* Auction Timer Badge Styles */
-.auction-timer-badge .badge {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  color: white !important;
-}
-
-.auction-timer-badge .badge:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.auction-timer-badge .badge.bg-success {
-  background: rgba(40, 167, 69, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.auction-timer-badge .badge.bg-warning {
-  background: rgba(255, 193, 7, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.auction-timer-badge .badge i {
-  font-size: 0.75rem;
-  margin-right: 4px;
-  animation: pulse-icon 2s infinite;
-  color: white !important;
-}
-
-@keyframes pulse-icon {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.1);
-  }
-}
+/* Removed auction timer badge styles to use default Bootstrap styles */
 
 /* Car Item Position Fix */
 .car-item.position-relative {
@@ -879,7 +835,7 @@ input:focus, select:focus, textarea:focus {
   margin-top: 30px;
 }
 
-/* Logo Image Control */
+/* logo image control */
 .logo-img {
   width: 160px !important;
   height: auto !important;
@@ -891,7 +847,7 @@ input:focus, select:focus, textarea:focus {
   top: 5px;
 }
 
-/* Permitir que el logo se desborde sin afectar el navbar */
+/* permitir que el logo se desborde sin afectar el navbar */
 .navbar-brand {
   overflow: visible !important;
   position: relative;

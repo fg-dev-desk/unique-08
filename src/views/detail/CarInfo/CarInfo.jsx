@@ -65,16 +65,10 @@ const CarInfo = () => {
         {/* auction status */}
         <div className="car-single-auction-status mb-3">
           {isActive ? (
-            <>
-              <span className="badge bg-success mb-2">
-                <i className="far fa-clock me-1"></i>
-                {data.labels.activeAuction}
-              </span>
-              <div className="auction-countdown">
-                <strong>{data.labels.timeRemaining}: </strong>
-                <span className="text-danger fw-bold">{timeLeft}</span>
-              </div>
-            </>
+            <span className="badge bg-success mb-2">
+              <i className="far fa-clock me-1"></i>
+              {data.labels.activeAuction}
+            </span>
           ) : (
             <span className="badge bg-danger text-white">
               <i className="far fa-clock me-1"></i>

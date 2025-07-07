@@ -83,7 +83,7 @@ export const AuctionTimer = ({ endDate, className = "" }) => {
 
   const getDisplayTime = () => {
     if (timeLeft.isExpired) {
-      return 'Terminada';
+      return null; // No mostrar nada si está expirada
     }
 
     if (timeLeft.days > 0) {
@@ -94,33 +94,26 @@ export const AuctionTimer = ({ endDate, className = "" }) => {
   };
 
   const getBadgeClass = () => {
-    if (timeLeft.isExpired) {
-      return 'bg-warning text-dark';
-    }
-    return 'bg-success text-white';
+    return 'bg-warning text-dark'; // Tono más oscuro con texto oscuro
   };
 
   const getIcon = () => {
-    if (timeLeft.isExpired) {
-      // Usando Font Awesome para el ícono de terminada
-      return <i className="fas fa-check-circle me-1"></i>;
-    }
-    // Usando Font Awesome para el ícono de reloj
-    return <i className="fas fa-clock me-1"></i>;
+    return <i className="far fa-clock me-1"></i>; // Siempre icono de reloj
   };
+
+  // No renderizar nada si la subasta ha terminado
+  if (timeLeft.isExpired || !getDisplayTime()) {
+    return null;
+  }
 
   return (
     <div className={`auction-timer-badge position-absolute ${className}`} 
          style={{
-           top: '10px',
-           right: '10px',
+           top: '15px',
+           right: '15px',
            zIndex: 2
          }}>
-      <span className={`badge ${getBadgeClass()} px-2 py-2 rounded-pill shadow-sm`}
-            style={{
-              fontSize: '0.75rem',
-              fontWeight: '600'
-            }}>
+      <span className={`badge ${getBadgeClass()}`}>
         {getIcon()}
         {getDisplayTime()}
       </span>

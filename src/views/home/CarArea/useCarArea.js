@@ -60,6 +60,15 @@ export const useCarArea = (scope = 'main') => {
       return car.fechaFin || car.fechaVencimiento;
     },
 
+    isAuctionActive: (car) => {
+      if (car.fechaFin) {
+        const end = new Date(car.fechaFin);
+        return end > new Date();
+      }
+      if (car.activo !== undefined) return car.activo;
+      return false;
+    },
+
     getStatus: (car) => {
       if (car.fechaFin) {
         const end = new Date(car.fechaFin);

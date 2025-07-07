@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import { setSearchQuery } from '../../../redux/features/home/homeSlice';
 import { AuctionTimer } from '../../../components/ui/AuctionTimer';
+import { AuctionStatus } from '../../../components/ui/AuctionStatus';
 
 import { carData } from './carData';
 import { useCarArea } from './useCarArea';
@@ -48,12 +49,12 @@ export const CarArea = ({ scope = 'main' }) => {
                   <div className="form-group">
                     <input 
                       type="text" 
-                      className="form-control car-search-input" 
+                      className="form-control" 
                       placeholder={carData.searchPlaceholder}
                       value={searchQuery} 
                       onChange={e => dispatch(setSearchQuery(e.target.value))} 
                     />
-                    <button type="submit" className="car-search-button">
+                    <button type="search">
                       <i className="far fa-search"></i>
                     </button>
                   </div>
@@ -82,10 +83,14 @@ export const CarArea = ({ scope = 'main' }) => {
             featuredCars.map((car) => (
               <div key={car.torreID || car.id} className="col-lg-6 col-xl-4">
                 <div className="car-item position-relative">
-                  {/* Timer badge */}
-                  {carHelpers.getAuctionEndDate(car) && (
+                  {/* Status badge - esquina superior izquierda */}
+                  <AuctionStatus isActive={carHelpers.isAuctionActive(car)} />
+                  
+                  {/* Timer badge - esquina superior derecha */}
+                  {carHelpers.getAuctionEndDate(car) && carHelpers.isAuctionActive(car) && (
                     <AuctionTimer endDate={carHelpers.getAuctionEndDate(car)} />
                   )}
+                  
                   <div className="car-img">
                     <img 
                       src={carHelpers.getCarImage(car)} 

@@ -38,7 +38,7 @@ const Header = () => {
                       <img src="/assets/img/icon/mail.svg" alt="" />
                     </div>
                     <div className="header-top-contact-info">
-                      <a href="mailto:info@example.com">info@example.com</a>
+                      <a href="mailto:info@uniquemotors.com">info@uniquemotors.com</a>
                     </div>
                   </li>
                   <li>
@@ -46,7 +46,7 @@ const Header = () => {
                       <img src="/assets/img/icon/clock.svg" alt="" />
                     </div>
                     <div className="header-top-contact-info">
-                      <a href="#">Sun - Fri (08AM - 10PM)</a>
+                      <a href="#">Lun - Vie (08AM - 10PM)</a>
                     </div>
                   </li>
                 </ul>
