@@ -69,7 +69,7 @@ const Header = () => {
         <nav className="navbar navbar-expand-lg">
           <div className="container custom-nav">
             <Link className="navbar-brand" to="/">
-              <img src="/assets/img/logo/unique-motors-vertical.png" alt="logo" />
+              <img className="logo-img" src="/assets/img/logo/unique-motors-vertical.png" alt="logo" />
             </Link>
             
             <div className="mobile-menu-right">

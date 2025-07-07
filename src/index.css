@@ -878,3 +878,12 @@ input:focus, select:focus, textarea:focus {
   padding: 30px;
   margin-top: 30px;
 }
+
+/* Logo Image Control */
+.logo-img {
+  width: 140px !important; /* Logo pequeño y forzar prioridad */
+  height: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  display: inline-block;
+}
