@@ -78,7 +78,7 @@ const CarTabs = () => {
               aria-controls="tab4" 
               aria-selected={activeTab === 'bidding'}
             >
-              Historial de Pujas (08)
+              Historial de Ofertas (08)
             </button>
           </div>
         </nav>
