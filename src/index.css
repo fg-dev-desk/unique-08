@@ -523,6 +523,25 @@ body {
   overflow: hidden;
 }
 
+/* Hero single styles - individual control per slide */
+.hero-slide-1 {
+  background-position: center -750px !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+.hero-slide-2 {
+  background-position: center -800px !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+.hero-slide-3 {
+  background-position: center -615px !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
 .hero-countdown h3 {
   font-family: "Barlow", sans-serif;
   font-weight: 700;

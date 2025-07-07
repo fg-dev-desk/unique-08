@@ -4,8 +4,17 @@ export const useHeroSection = () => {
   
   // helpers
   const heroHelpers = {
-    getSlideBackground: (image) => {
-      return `url(${image})`;
+    getSlideBackground: (slide) => {
+      return `url(${slide.image})`;
+    },
+
+    getSlideStyle: (slide) => {
+      return {
+        background: `url(${slide.image})`,
+        backgroundPosition: slide.backgroundPosition || 'center center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      };
     },
     
     formatSlideTitle: (title) => {

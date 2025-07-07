@@ -9,8 +9,8 @@ const HeroSection = () => {
     <div className="hero-section">
       <div className="hero-slider owl-carousel owl-theme">
         {heroData.slides.map((slide, index) => (
-          <div key={index} className="hero-single" style={{
-            background: heroHelpers.getSlideBackground(slide.image)
+          <div key={index} className={`hero-single hero-slide-${index + 1}`} style={{
+            background: heroHelpers.getSlideBackground(slide)
           }}>
             <div className="container">
               <div className="row align-items-center">
