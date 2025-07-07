@@ -6,7 +6,7 @@ const contactInfoData = {
     {
       icon: "fal fa-map-marker-alt",
       title: "Dirección de Oficina",
-      content: "Av. Revolución 1234, Col. Centro, Ciudad de México"
+      content: "Av. Revolución 1234, CDMX"
     },
     {
       icon: "fal fa-phone",
