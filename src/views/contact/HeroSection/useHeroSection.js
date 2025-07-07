@@ -13,7 +13,7 @@ export const useHeroSection = () => {
     },
     
     renderBreadcrumbItem: (item) => {
-      return item.active ? item.label : <a href={item.path}>{item.label}</a>;
+      return item.active ? item.label : { href: item.path, label: item.label };
     }
   };
 
