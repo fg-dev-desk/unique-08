@@ -6,7 +6,7 @@ import SellWizard from './SellWizard/SellWizard';
 const Sell = () => {
   return (
     <>
-      {/* <HeroSection /> */}
+      <HeroSection />
       <SellWizard />
     </>
   );
