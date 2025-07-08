@@ -4,7 +4,6 @@ import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { AuctionStatus } from '../../../components/ui/AuctionStatus';
 
 import { useCarArea } from './useCarArea';
-import './carAreaStyles.css';
 
 export const CarArea = ({ scope = 'main' }) => {
   const {
