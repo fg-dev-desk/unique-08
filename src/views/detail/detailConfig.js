@@ -20,7 +20,7 @@ export const detailConfig = {
       transferFee: "Comisión de Transferencia",
       dispositionFee: "Comisión de Disposición",
       shareAuction: "Compartir Subasta",
-      viewAuction: "Ver Subasta",
+      viewAuction: "Ver Más",
       
       // car details
       carDetails: "Detalles del Vehículo",

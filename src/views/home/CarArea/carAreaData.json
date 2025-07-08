@@ -15,9 +15,9 @@
   "labels": {
     "model": "Modelo",
     "people": "Personas",
-    "perMonth": "/ mes",
+    "perMonth": "",
     "loadMore": "Cargar Más",
-    "rentNow": "Ver Subasta"
+    "rentNow": "Ver Más"
   },
   "messages": {
     "loading": "Cargando autos...",
@@ -29,7 +29,7 @@
     "fuel": "Híbrido",
     "efficiency": "10.15km / 1-litro",
     "transmission": "Automático",
-    "price": "$390",
+    "price": "Finaliza en: ",
     "rating": "5.0"
   }
 }
