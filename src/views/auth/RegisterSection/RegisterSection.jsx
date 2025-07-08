@@ -1,92 +1,27 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { startRegistro } from '../../../redux/features/auth/thunks';
-import { consLogged } from '../../../const/consLogged';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Breadcrumb from '../../../components/ui/Breadcrumb';
-import { authConfig } from '../authConfig';
+import { useRegisterSection } from './useRegisterSection';
+import registerSectionData from './registerSectionData.json';
 
 const RegisterSection = () => {
-  const [formData, setFormData] = useState({
-    nombre: '',
-    email: '',
-    password: ''
-  });
-  const [errors, setErrors] = useState({});
-  const [agreeTerms, setAgreeTerms] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const {
+    formData,
+    errors,
+    agreeTerms,
+    loadingLogin,
+    handleInputChange,
+    handleSubmit,
+    setAgreeTerms
+  } = useRegisterSection();
 
-  const { loadingLogin, logged } = useSelector(state => state.userReducer);
-  const { data } = authConfig;
-  
-  // Redirect to home if already logged in
-  React.useEffect(() => {
-    if (logged === consLogged.LOGGED) {
-      navigate('/');
-    }
-  }, [logged, navigate]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.nombre) {
-      newErrors.nombre = 'El nombre es requerido';
-    } else if (formData.nombre.length < 2) {
-      newErrors.nombre = 'El nombre debe tener al menos 2 caracteres';
-    }
-    
-    if (!formData.email) {
-      newErrors.email = 'El email es requerido';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'El email no es válido';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'La contraseña es requerida';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
-    }
-    
-    if (!agreeTerms) {
-      newErrors.terms = 'Debes aceptar los términos de servicio';
-    }
-    
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validateForm();
-    
-    if (Object.keys(newErrors).length === 0) {
-      dispatch(startRegistro(formData));
-    } else {
-      setErrors(newErrors);
-    }
-  };
+  const { breadcrumb, header, form, footer } = registerSectionData;
 
   return (
     <>
       <Breadcrumb 
-        title="Crear Cuenta"
-        currentPage="Crear Cuenta"
+        title={breadcrumb.title}
+        currentPage={breadcrumb.currentPage}
       />
       
       <div className="login-area py-120">
@@ -94,20 +29,20 @@ const RegisterSection = () => {
           <div className="col-md-5 mx-auto">
             <div className="login-form">
               <div className="login-header">
-                <img src="/assets/img/logo/logo.png" alt="" />
-                <p>Crea tu cuenta en Unique Motors</p>
+                <img src={header.logoSrc} alt={header.logoAlt} />
+                <p>{header.subtitle}</p>
               </div>
               
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label>Nombre Completo</label>
+                  <label>{form.fields.nombre.label}</label>
                   <input
-                    type="text"
+                    type={form.fields.nombre.type}
                     className="form-control"
                     name="nombre"
                     value={formData.nombre}
                     onChange={handleInputChange}
-                    placeholder="Tu nombre completo"
+                    placeholder={form.fields.nombre.placeholder}
                     disabled={loadingLogin}
                   />
                   {errors.nombre && (
@@ -116,14 +51,14 @@ const RegisterSection = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label>Correo Electrónico</label>
+                  <label>{form.fields.email.label}</label>
                   <input
-                    type="email"
+                    type={form.fields.email.type}
                     className="form-control"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Tu correo electrónico"
+                    placeholder={form.fields.email.placeholder}
                     disabled={loadingLogin}
                   />
                   {errors.email && (
@@ -132,14 +67,14 @@ const RegisterSection = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label>Contraseña</label>
+                  <label>{form.fields.password.label}</label>
                   <input
-                    type="password"
+                    type={form.fields.password.type}
                     className="form-control"
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="Tu contraseña"
+                    placeholder={form.fields.password.placeholder}
                     disabled={loadingLogin}
                   />
                   {errors.password && (
@@ -153,11 +88,11 @@ const RegisterSection = () => {
                     type="checkbox" 
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
-                    id="agree"
+                    id={form.terms.id}
                     disabled={loadingLogin}
                   />
-                  <label className="form-check-label" htmlFor="agree">
-                    Acepto los <Link to="/terms">Términos de Servicio</Link>
+                  <label className="form-check-label" htmlFor={form.terms.id}>
+                    Acepto los <Link to={form.terms.link}>{form.terms.linkText}</Link>
                   </label>
                   {errors.terms && (
                     <small className="text-danger d-block">{errors.terms}</small>
@@ -172,11 +107,11 @@ const RegisterSection = () => {
                   >
                     {loadingLogin ? (
                       <>
-                        <i className="far fa-spinner fa-spin"></i> Creating account...
+                        <i className={form.submitButton.loadingIcon}></i> {form.submitButton.loadingText}
                       </>
                     ) : (
                       <>
-                        <i className="far fa-paper-plane"></i> Crear Cuenta
+                        <i className={form.submitButton.icon}></i> {form.submitButton.text}
                       </>
                     )}
                   </button>
@@ -184,13 +119,17 @@ const RegisterSection = () => {
               </form>
               
               <div className="login-footer">
-                <p>¿Ya tienes cuenta? <Link to="/login">Iniciar sesión</Link></p>
+                <p>
+                  {footer.loginLink.text} <Link to={footer.loginLink.link}>{footer.loginLink.linkText}</Link>
+                </p>
                 <div className="social-login">
-                  <p>Registrarse con redes sociales</p>
+                  <p>{footer.socialLogin.title}</p>
                   <div className="social-login-list">
-                    <a href="#"><i className="fab fa-facebook-f"></i></a>
-                    <a href="#"><i className="fab fa-google"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
+                    {footer.socialLogin.providers.map((provider, index) => (
+                      <a key={index} href={provider.href}>
+                        <i className={provider.icon}></i>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>

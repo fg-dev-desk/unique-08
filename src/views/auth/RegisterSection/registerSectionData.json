@@ -1,0 +1,69 @@
+{
+  "breadcrumb": {
+    "title": "Crear Cuenta",
+    "currentPage": "Crear Cuenta"
+  },
+  "header": {
+    "logoSrc": "/assets/img/logo/logo.png",
+    "logoAlt": "Unique Motors",
+    "subtitle": "Crea tu cuenta en Unique Motors"
+  },
+  "form": {
+    "fields": {
+      "nombre": {
+        "label": "Nombre Completo",
+        "placeholder": "Tu nombre completo",
+        "type": "text"
+      },
+      "email": {
+        "label": "Correo Electrónico",
+        "placeholder": "Tu correo electrónico",
+        "type": "email"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "Tu contraseña",
+        "type": "password"
+      }
+    },
+    "terms": {
+      "label": "Acepto los {termsLink}",
+      "linkText": "Términos de Servicio",
+      "link": "/terms",
+      "id": "agree"
+    },
+    "submitButton": {
+      "text": "Crear Cuenta",
+      "loadingText": "Creating account...",
+      "icon": "far fa-paper-plane",
+      "loadingIcon": "far fa-spinner fa-spin"
+    }
+  },
+  "footer": {
+    "loginLink": {
+      "text": "¿Ya tienes cuenta?",
+      "linkText": "Iniciar sesión",
+      "link": "/login"
+    },
+    "socialLogin": {
+      "title": "Registrarse con redes sociales",
+      "providers": [
+        {
+          "name": "facebook",
+          "icon": "fab fa-facebook-f",
+          "href": "#"
+        },
+        {
+          "name": "google",
+          "icon": "fab fa-google",
+          "href": "#"
+        },
+        {
+          "name": "twitter",
+          "icon": "fab fa-twitter",
+          "href": "#"
+        }
+      ]
+    }
+  }
+}

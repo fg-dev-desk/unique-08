@@ -1,81 +1,28 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { startLogin } from '../../../redux/features/auth/thunks';
-import { consLogged } from '../../../const/consLogged';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Breadcrumb from '../../../components/ui/Breadcrumb';
-import { authConfig } from '../authConfig';
+import { useLoginSection } from './useLoginSection';
+import loginSectionData from './loginSectionData.json';
 
 const LoginSection = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-  const [errors, setErrors] = useState({});
-  const [rememberMe, setRememberMe] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  
-  const { loginErr, loadingLogin, logged } = useSelector(state => state.userReducer);
-  const { data } = authConfig;
-  
-  // Redirect to home if already logged in
-  React.useEffect(() => {
-    if (logged === consLogged.LOGGED) {
-      navigate('/');
-    }
-  }, [logged, navigate]);
+  const {
+    formData,
+    errors,
+    rememberMe,
+    loginErr,
+    loadingLogin,
+    handleInputChange,
+    handleSubmit,
+    setRememberMe
+  } = useLoginSection();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.email) {
-      newErrors.email = 'El email es requerido';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'El email no es válido';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'La contraseña es requerida';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
-    }
-    
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validateForm();
-    
-    if (Object.keys(newErrors).length === 0) {
-      dispatch(startLogin(formData));
-    } else {
-      setErrors(newErrors);
-    }
-  };
+  const { breadcrumb, header, form, footer } = loginSectionData;
 
   return (
     <>
       <Breadcrumb 
-        title="Iniciar Sesión"
-        currentPage="Iniciar Sesión"
+        title={breadcrumb.title}
+        currentPage={breadcrumb.currentPage}
       />
       
       <div className="login-area py-120">
@@ -83,20 +30,20 @@ const LoginSection = () => {
           <div className="col-md-5 mx-auto">
             <div className="login-form">
               <div className="login-header">
-                <img src="/assets/img/logo/logo.png" alt="" />
-                <p>Inicia sesión en tu cuenta de Unique Motors</p>
+                <img src={header.logoSrc} alt={header.logoAlt} />
+                <p>{header.subtitle}</p>
               </div>
               
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label>Correo Electrónico</label>
+                  <label>{form.fields.email.label}</label>
                   <input
-                    type="email"
+                    type={form.fields.email.type}
                     className="form-control"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Tu correo electrónico"
+                    placeholder={form.fields.email.placeholder}
                     disabled={loadingLogin}
                   />
                   {errors.email && (
@@ -105,14 +52,14 @@ const LoginSection = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label>Contraseña</label>
+                  <label>{form.fields.password.label}</label>
                   <input
-                    type="password"
+                    type={form.fields.password.type}
                     className="form-control"
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="Tu contraseña"
+                    placeholder={form.fields.password.placeholder}
                     disabled={loadingLogin}
                   />
                   {errors.password && (
@@ -134,14 +81,16 @@ const LoginSection = () => {
                       type="checkbox" 
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
-                      id="remember"
+                      id={form.rememberMe.id}
                       disabled={loadingLogin}
                     />
-                    <label className="form-check-label" htmlFor="remember">
-                      Recordarme
+                    <label className="form-check-label" htmlFor={form.rememberMe.id}>
+                      {form.rememberMe.label}
                     </label>
                   </div>
-                  <Link to="/forgot-password" className="forgot-pass">¿Olvidaste tu contraseña?</Link>
+                  <Link to={form.forgotPassword.link} className="forgot-pass">
+                    {form.forgotPassword.text}
+                  </Link>
                 </div>
                 
                 <div className="d-flex align-items-center">
@@ -152,11 +101,11 @@ const LoginSection = () => {
                   >
                     {loadingLogin ? (
                       <>
-                        <i className="far fa-spinner fa-spin"></i> Signing in...
+                        <i className={form.submitButton.loadingIcon}></i> {form.submitButton.loadingText}
                       </>
                     ) : (
                       <>
-                        <i className="far fa-sign-in"></i> Iniciar Sesión
+                        <i className={form.submitButton.icon}></i> {form.submitButton.text}
                       </>
                     )}
                   </button>
@@ -164,13 +113,17 @@ const LoginSection = () => {
               </form>
               
               <div className="login-footer">
-                <p>¿No tienes cuenta? <Link to="/register">Crear cuenta</Link></p>
+                <p>
+                  {footer.registerLink.text} <Link to={footer.registerLink.link}>{footer.registerLink.linkText}</Link>
+                </p>
                 <div className="social-login">
-                  <p>Continuar con redes sociales</p>
+                  <p>{footer.socialLogin.title}</p>
                   <div className="social-login-list">
-                    <a href="#"><i className="fab fa-facebook-f"></i></a>
-                    <a href="#"><i className="fab fa-google"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
+                    {footer.socialLogin.providers.map((provider, index) => (
+                      <a key={index} href={provider.href}>
+                        <i className={provider.icon}></i>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>

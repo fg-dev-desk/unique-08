@@ -1,0 +1,66 @@
+{
+  "breadcrumb": {
+    "title": "Iniciar Sesión",
+    "currentPage": "Iniciar Sesión"
+  },
+  "header": {
+    "logoSrc": "/assets/img/logo/logo.png",
+    "logoAlt": "Unique Motors",
+    "subtitle": "Inicia sesión en tu cuenta de Unique Motors"
+  },
+  "form": {
+    "fields": {
+      "email": {
+        "label": "Correo Electrónico",
+        "placeholder": "Tu correo electrónico",
+        "type": "email"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "Tu contraseña",
+        "type": "password"
+      }
+    },
+    "rememberMe": {
+      "label": "Recordarme",
+      "id": "remember"
+    },
+    "forgotPassword": {
+      "text": "¿Olvidaste tu contraseña?",
+      "link": "/forgot-password"
+    },
+    "submitButton": {
+      "text": "Iniciar Sesión",
+      "loadingText": "Signing in...",
+      "icon": "far fa-sign-in",
+      "loadingIcon": "far fa-spinner fa-spin"
+    }
+  },
+  "footer": {
+    "registerLink": {
+      "text": "¿No tienes cuenta?",
+      "linkText": "Crear cuenta",
+      "link": "/register"
+    },
+    "socialLogin": {
+      "title": "Continuar con redes sociales",
+      "providers": [
+        {
+          "name": "facebook",
+          "icon": "fab fa-facebook-f",
+          "href": "#"
+        },
+        {
+          "name": "google",
+          "icon": "fab fa-google",
+          "href": "#"
+        },
+        {
+          "name": "twitter",
+          "icon": "fab fa-twitter",
+          "href": "#"
+        }
+      ]
+    }
+  }
+}

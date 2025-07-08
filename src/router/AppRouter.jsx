@@ -8,8 +8,7 @@ import About from "../views/about/About";
 import Contact from "../views/contact/Contact";
 import Sell from "../views/sell/Sell";
 import Detail from "../views/detail/Detail";
-import LoginSection from "../views/auth/LoginSection/LoginSection";
-import RegisterSection from "../views/auth/RegisterSection/RegisterSection";
+import Auth from "../views/auth/Auth";
 import Profile from "../views/profile/Profile";
 import ProfileSettingsPage from "../views/profile/ProfileSettingsPage";
 import BillingInfoPage from "../views/profile/BillingInfoPage";
@@ -69,7 +68,7 @@ export const AppRouter = () => {
           path="/login" 
           element={
             <PublicRoute>
-              <LoginSection />
+              <Auth />
             </PublicRoute>
           } 
         />
@@ -77,7 +76,7 @@ export const AppRouter = () => {
           path="/register" 
           element={
             <PublicRoute>
-              <RegisterSection />
+              <Auth />
             </PublicRoute>
           } 
         />
