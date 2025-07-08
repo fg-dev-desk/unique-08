@@ -1,0 +1,39 @@
+{
+  "labels": {
+    "billingInfo": "Billing Info",
+    "billingInformation": "Billing Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "address2": "Address 2",
+    "city": "City",
+    "state": "State",
+    "zip": "Zip",
+    "saveBillingInfo": "Save Billing Info",
+    "saving": "Saving...",
+    "savedSuccessfully": "Billing information saved successfully!"
+  },
+  "placeholders": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "address2": "Address 2",
+    "city": "City",
+    "state": "State",
+    "zip": "Zip"
+  },
+  "validation": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email is invalid",
+    "addressRequired": "Address is required",
+    "cityRequired": "City is required",
+    "stateRequired": "State is required",
+    "zipRequired": "Zip code is required"
+  }
+}

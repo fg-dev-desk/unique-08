@@ -1,0 +1,102 @@
+{
+  "labels": {
+    "biddingHistory": "Historial de Pujas",
+    "currentBid": "Puja Actual",
+    "initialBid": "Puja Inicial",
+    "reservePrice": "Precio Reserva",
+    "timeRemaining": "Tiempo Restante",
+    "totalBids": "Total de Pujas",
+    "uniqueBidders": "Participantes Únicos",
+    "averageBid": "Puja Promedio",
+    "winning": "Ganando",
+    "currentWinningBid": "Puja ganadora actual",
+    "placeBid": "Realizar Puja",
+    "bidAmount": "Monto de la Puja",
+    "yourName": "Tu Nombre*",
+    "yourEmail": "Tu Email*",
+    "optionalComment": "Comentario opcional sobre tu puja...",
+    "submitBid": "Realizar Puja",
+    "additionalInfo": "Información Adicional",
+    "fullDescription": "Descripción Completa",
+    "observations": "Observaciones",
+    "otherData": "Otros Datos",
+    "fullSpecifications": "Especificaciones Completas",
+    "minimumBid": "Mínimo:",
+    "bidHigherThan": "Tu puja debe ser mayor a",
+    "minimumIncrement": "Incremento mínimo:",
+    "bidMustBeHigher": "La puja debe ser mayor a",
+    "automaticBid": "Puja Automática",
+    "manualBid": "Puja Manual"
+  },
+  "content": {
+    "fullDescription": "Descubre la experiencia de conducir una obra maestra italiana. Este Ferrari 488 Spider combina lo mejor del diseño aerodinámico, la ingeniería de alto rendimiento y el lujo sin compromisos. Un vehículo creado no solo para llegar rápido, sino para hacerlo con estilo y exclusividad.",
+    "observations": "Vehículo en excelente estado de conservación. Mantenimientos al día. Documentación completa. Historial de servicios disponible.",
+    "otherData": "Incluye llaves originales, manuales de usuario, certificado de autenticidad y garantía extendida. Disponible para inspección previa cita.",
+    "specifications": [
+      {
+        "label": "Marca",
+        "value": "Ferrari"
+      },
+      {
+        "label": "Modelo",
+        "value": "2020"
+      },
+      {
+        "label": "Submarca",
+        "value": "430 Spider"
+      },
+      {
+        "label": "Origen",
+        "value": "Importado"
+      },
+      {
+        "label": "Carrocería",
+        "value": "Convertible"
+      },
+      {
+        "label": "País de Origen",
+        "value": "US"
+      },
+      {
+        "label": "Combustible",
+        "value": "Gasolina"
+      },
+      {
+        "label": "Potencia",
+        "value": "490hp"
+      },
+      {
+        "label": "Torque",
+        "value": "450Lbp"
+      },
+      {
+        "label": "Transmisión",
+        "value": "Manual"
+      },
+      {
+        "label": "Color",
+        "value": "Rojo"
+      },
+      {
+        "label": "Versión",
+        "value": "4.3 Spider F1 6vel Sec Al Volante Mt"
+      },
+      {
+        "label": "Kilometraje",
+        "value": "22,300 km"
+      },
+      {
+        "label": "Número de Dueños",
+        "value": "1"
+      },
+      {
+        "label": "Motor",
+        "value": "4.3L V8"
+      },
+      {
+        "label": "Edición Especial",
+        "value": "No"
+      }
+    ]
+  }
+}

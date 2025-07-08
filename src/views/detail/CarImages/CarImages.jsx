@@ -1,142 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-import { useCarDetail } from '../hooks/useCarDetail';
 import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { AuctionStatus } from '../../../components/ui/AuctionStatus';
+import { useCarImages } from './useCarImages';
+import detailData from '../detailData.json';
 
 const CarImages = () => {
-  // hooks
-  const { car, loading, error } = useCarDetail();
-  const [, setTick] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [zoomLevel, setZoomLevel] = useState(1);
-  const sliderRef = useRef();
+  const {
+    car,
+    loading,
+    error,
+    showModal,
+    selectedImage,
+    currentImageIndex,
+    zoomLevel,
+    sliderRef,
+    isAuctionActive,
+    getAuctionEndDate,
+    openModal,
+    closeModal,
+    navigateImage,
+    handleZoom,
+    handleThumbnailClick
+  } = useCarImages();
 
-  // effects
-  useEffect(() => {
-    const interval = setInterval(() => setTick(t => t + 1), 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Manejar eventos de teclado
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (!showModal) return;
-      
-      switch(event.keyCode) {
-        case 27: // ESC
-          closeModal();
-          break;
-        case 37: // Flecha izquierda
-          navigateImage('prev');
-          break;
-        case 39: // Flecha derecha
-          navigateImage('next');
-          break;
-        case 187: // + (zoom in)
-        case 61:  // + sin shift
-          event.preventDefault();
-          handleZoom(0.2);
-          break;
-        case 189: // - (zoom out)
-          event.preventDefault();
-          handleZoom(-0.2);
-          break;
-        default:
-          break;
-      }
-    };
-    
-    if (showModal) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-    }
-    
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
-    };
-  }, [showModal, currentImageIndex]);
-
-  // Inicializa Owl Carousel cuando car.imagenes cambia
-  useEffect(() => {
-    if (car && car.imagenes && window.$ && window.$(sliderRef.current).owlCarousel) {
-      window.$(sliderRef.current).owlCarousel({
-        loop: true,
-        nav: true,
-        dots: false,
-        margin: 0,
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 5000,
-        items: 1,
-        navText: [
-          "<i class='far fa-long-arrow-left'></i>",
-          "<i class='far fa-long-arrow-right'></i>"
-        ],
-      });
-    }
-  }, [car]);
-
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <div>{detailData.labels.loading}</div>;
   if (error) return <div>{error}</div>;
   if (!car) return null;
-
-  const openModal = (img, index) => {
-    setSelectedImage(img);
-    setCurrentImageIndex(index);
-    setZoomLevel(1);
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedImage(null);
-    setZoomLevel(1);
-  };
-
-  const navigateImage = (direction) => {
-    if (!car.imagenes || car.imagenes.length === 0) return;
-    
-    let newIndex;
-    if (direction === 'next') {
-      newIndex = currentImageIndex === car.imagenes.length - 1 ? 0 : currentImageIndex + 1;
-    } else {
-      newIndex = currentImageIndex === 0 ? car.imagenes.length - 1 : currentImageIndex - 1;
-    }
-    
-    setCurrentImageIndex(newIndex);
-    setSelectedImage(car.imagenes[newIndex]);
-    setZoomLevel(1);
-    
-    // Sincronizar con el carousel
-    if (window.$ && window.$(sliderRef.current).trigger) {
-      window.$(sliderRef.current).trigger('to.owl.carousel', [newIndex, 300]);
-    }
-  };
-
-  const handleZoom = (delta) => {
-    setZoomLevel(prev => {
-      const newZoom = prev + delta;
-      return Math.max(0.5, Math.min(3, newZoom)); // Límite entre 0.5x y 3x
-    });
-  };
-
-  // Funciones helper para el estado de subasta
-  const isAuctionActive = () => {
-    if (car.fechaFin) {
-      const end = new Date(car.fechaFin);
-      return end > new Date();
-    }
-    if (car.activo !== undefined) return car.activo;
-    return false;
-  };
-
-  const getAuctionEndDate = () => {
-    return car.fechaFin || car.fechaVencimiento;
-  };
 
   return (
     <>
@@ -184,14 +74,7 @@ const CarImages = () => {
                         cursor: 'pointer',
                         border: '2px solid transparent'
                       }}
-                      onClick={() => {
-                        // Navegar en el carousel
-                        if (window.$ && window.$(sliderRef.current).trigger) {
-                          window.$(sliderRef.current).trigger('to.owl.carousel', [index, 300]);
-                        }
-                        // Abrir modal con imagen completa
-                        openModal(img, index);
-                      }}
+                      onClick={() => handleThumbnailClick(img, index)}
                     />
                   </div>
                 </div>

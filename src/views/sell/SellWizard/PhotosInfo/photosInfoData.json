@@ -1,0 +1,36 @@
+{
+  "title": "Fotos del Vehículo",
+  "description": "Sube hasta 5 fotos de tu vehículo para que los compradores puedan verlo mejor",
+  "uploadArea": {
+    "title": "Arrastra y suelta fotos aquí",
+    "subtitle": "O haz clic para seleccionar archivos",
+    "formats": "JPG, PNG, JPEG hasta 5MB cada una",
+    "maxFiles": "Máximo 5 fotos"
+  },
+  "preview": {
+    "title": "Vista previa de las fotos"
+  },
+  "summary": {
+    "title": "Resumen del Anuncio",
+    "fields": {
+      "vendedor": "Vendedor",
+      "email": "Email",
+      "telefono": "Teléfono",
+      "vehiculo": "Vehículo",
+      "precio": "Precio",
+      "fotos": "Fotos subidas"
+    }
+  },
+  "validation": {
+    "minImages": "Debe subir al menos una imagen",
+    "maxImages": "Máximo 5 imágenes permitidas",
+    "fileSize": "Cada imagen debe ser menor a 5MB",
+    "fileFormat": "Solo se permiten archivos JPG, PNG, JPEG"
+  },
+  "messages": {
+    "dragActive": "Suelta las imágenes aquí",
+    "uploadSuccess": "Imágenes subidas exitosamente",
+    "uploadError": "Error al subir las imágenes",
+    "removeSuccess": "Imagen eliminada"
+  }
+}

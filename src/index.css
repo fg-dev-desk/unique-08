@@ -49,6 +49,81 @@ html, body {
 
 /* Override para el tema del sitio */
 
+/* BiddingHistory Component Styles */
+.auction-summary {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.auction-summary .text-primary {
+  color: #007bff !important;
+}
+
+.auction-summary .text-danger {
+  color: #dc3545 !important;
+}
+
+.bid-avatar-container {
+  position: relative;
+  margin-right: 15px;
+}
+
+.winning-bid-badge {
+  background-color: #28a745;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.bid-type-label {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: normal;
+}
+
+.bid-type-label.automatic-bid {
+  background-color: #e7f3ff;
+  color: #0066cc;
+}
+
+.bid-type-label.manual-bid {
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+.additional-info-section {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.additional-info-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.additional-info-header:hover {
+  background-color: #e9ecef;
+}
+
+.additional-info-content {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
 /* Quitar cualquier efecto glassmorphism o backdrop-filter */
 * {
   backdrop-filter: none !important;

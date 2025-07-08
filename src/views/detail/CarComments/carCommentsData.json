@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "comments": "Comentarios",
+    "leaveComment": "Dejar un Comentario",
+    "yourRating": "Tu Calificación",
+    "yourName": "Tu Nombre*",
+    "yourEmail": "Tu Email*",
+    "yourComment": "Tu Comentario*",
+    "submitComment": "Enviar Comentario",
+    "reply": "Responder"
+  }
+}

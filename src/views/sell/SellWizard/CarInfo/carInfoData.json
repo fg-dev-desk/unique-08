@@ -1,0 +1,165 @@
+{
+  "title": "Información del Vehículo",
+  "fields": {
+    "marca": {
+      "label": "Marca",
+      "placeholder": "Seleccione una marca",
+      "options": [
+        "Toyota",
+        "Honda",
+        "Ford",
+        "Chevrolet",
+        "Nissan",
+        "BMW",
+        "Mercedes-Benz",
+        "Audi",
+        "Volkswagen",
+        "Hyundai",
+        "Kia",
+        "Mazda",
+        "Subaru",
+        "Lexus",
+        "Acura",
+        "Infiniti",
+        "Cadillac",
+        "Lincoln",
+        "Buick",
+        "GMC",
+        "Jeep",
+        "Dodge",
+        "Chrysler",
+        "Ram",
+        "Volvo",
+        "Jaguar",
+        "Land Rover",
+        "Porsche",
+        "Ferrari",
+        "Lamborghini",
+        "Maserati",
+        "Alfa Romeo",
+        "Fiat",
+        "Mini",
+        "Smart",
+        "Tesla",
+        "Peugeot",
+        "Citroën",
+        "Renault",
+        "Seat",
+        "Skoda",
+        "Otro"
+      ]
+    },
+    "modelo": {
+      "label": "Modelo",
+      "placeholder": "Ej: Corolla, Civic, Focus"
+    },
+    "año": {
+      "label": "Año",
+      "placeholder": "Ej: 2020"
+    },
+    "kilometraje": {
+      "label": "Kilometraje",
+      "placeholder": "Ej: 50000"
+    },
+    "combustible": {
+      "label": "Tipo de Combustible",
+      "placeholder": "Seleccione el tipo",
+      "options": [
+        "Gasolina",
+        "Diesel",
+        "Híbrido",
+        "Eléctrico",
+        "Gas Natural",
+        "GLP"
+      ]
+    },
+    "transmision": {
+      "label": "Tipo de Transmisión",
+      "placeholder": "Seleccione el tipo",
+      "options": [
+        "Manual",
+        "Automática",
+        "CVT",
+        "Dual Clutch",
+        "Semi-automática"
+      ]
+    },
+    "precio": {
+      "label": "Precio",
+      "placeholder": "Ej: 15000"
+    },
+    "descripcion": {
+      "label": "Descripción",
+      "placeholder": "Describa las características del vehículo"
+    },
+    "tipoTransmision": {
+      "label": "Tipo de Transmisión",
+      "placeholder": "Seleccione el tipo",
+      "options": [
+        "Manual",
+        "Automática",
+        "CVT",
+        "Dual Clutch",
+        "Semi-automática"
+      ]
+    },
+    "tipoCombustible": {
+      "label": "Tipo de Combustible",
+      "placeholder": "Seleccione el tipo",
+      "options": [
+        "Gasolina",
+        "Diesel",
+        "Híbrido",
+        "Eléctrico",
+        "Gas Natural",
+        "GLP"
+      ]
+    },
+    "color": {
+      "label": "Color",
+      "placeholder": "Ej: Blanco, Negro, Rojo"
+    },
+    "numeroChasis": {
+      "label": "Número de Chasis",
+      "placeholder": "Ingrese el número de chasis"
+    },
+    "numeroPlaca": {
+      "label": "Número de Placa",
+      "placeholder": "Ej: ABC-123"
+    },
+    "puertas": {
+      "label": "Número de Puertas",
+      "placeholder": "Seleccione",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "asientos": {
+      "label": "Número de Asientos",
+      "placeholder": "Seleccione",
+      "options": [
+        "2",
+        "4",
+        "5",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    "condicion": {
+      "label": "Condición",
+      "placeholder": "Seleccione la condición",
+      "options": [
+        "Nuevo",
+        "Usado - Excelente",
+        "Usado - Muy Bueno",
+        "Usado - Bueno",
+        "Usado - Regular",
+        "Para Repuestos"
+      ]
+    }
+  }
+}

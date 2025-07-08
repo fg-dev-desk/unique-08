@@ -1,83 +1,26 @@
-import React, { useState } from 'react';
-import { mockComments } from '../../../mocks';
+import React from 'react';
+import { useCarComments } from './useCarComments';
+import carCommentsData from './carCommentsData.json';
 
 const CarComments = () => {
-  const [comments, setComments] = useState(mockComments);
-  const [newComment, setNewComment] = useState({
-    userName: '',
-    userEmail: '',
-    comment: '',
-    rating: 0
-  });
-  const [hoverRating, setHoverRating] = useState(0);
+  const {
+    comments,
+    newComment,
+    hoverRating,
+    handleRatingClick,
+    handleRatingHover,
+    handleSubmitComment,
+    renderStars,
+    renderRatingInput,
+    handleInputChange
+  } = useCarComments();
 
-  const handleRatingClick = (rating) => {
-    setNewComment({ ...newComment, rating });
-  };
-
-  const handleRatingHover = (rating) => {
-    setHoverRating(rating);
-  };
-
-  const handleSubmitComment = (e) => {
-    e.preventDefault();
-    if (newComment.userName && newComment.userEmail && newComment.comment && newComment.rating > 0) {
-      const comment = {
-        id: comments.length + 1,
-        userName: newComment.userName,
-        userImage: "assets/img/blog/com-1.jpg",
-        date: new Date().toLocaleDateString('es-ES', { 
-          day: 'numeric', 
-          month: 'long', 
-          year: 'numeric' 
-        }),
-        rating: newComment.rating,
-        comment: newComment.comment
-      };
-      
-      setComments([...comments, comment]);
-      setNewComment({ userName: '', userEmail: '', comment: '', rating: 0 });
-      setHoverRating(0);
-    }
-  };
-
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
-        stars.push(<i key={i} className="fas fa-star"></i>);
-      } else if (i - 0.5 <= rating) {
-        stars.push(<i key={i} className="fas fa-star-half-alt"></i>);
-      } else {
-        stars.push(<i key={i} className="far fa-star"></i>);
-      }
-    }
-    return stars;
-  };
-
-  const renderRatingInput = () => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <i
-          key={i}
-          className={`${
-            i <= (hoverRating || newComment.rating) ? 'fas' : 'far'
-          } fa-star`}
-          style={{ cursor: 'pointer', color: '#ffc107' }}
-          onClick={() => handleRatingClick(i)}
-          onMouseEnter={() => handleRatingHover(i)}
-          onMouseLeave={() => setHoverRating(0)}
-        />
-      );
-    }
-    return stars;
-  };
+  const { labels } = carCommentsData;
 
   return (
     <div className="car-single-review">
       <div className="blog-comments">
-        <h3>Comentarios ({comments.length})</h3>
+        <h3>{labels.comments} ({comments.length})</h3>
         <div className="blog-comments-wrapper">
           {comments.map((comment) => (
             <div key={comment.id} className="blog-comments-single">
@@ -91,19 +34,19 @@ const CarComments = () => {
                   <span><i className="far fa-clock"></i> {comment.date}</span>
                 </div>
                 <p>{comment.comment}</p>
-                <a href="#"><i className="far fa-reply"></i> Responder</a>
+                <a href="#"><i className="far fa-reply"></i> {labels.reply}</a>
               </div>
             </div>
           ))}
         </div>
 
         <div className="blog-comments-form">
-          <h3>Dejar un Comentario</h3>
+          <h3>{labels.leaveComment}</h3>
           <form onSubmit={handleSubmitComment}>
             <div className="row">
               <div className="col-md-12">
                 <div className="form-group car-review-rating">
-                  <label>Tu Calificación</label>
+                  <label>{labels.yourRating}</label>
                   <div>
                     {renderRatingInput()}
                   </div>
@@ -114,9 +57,9 @@ const CarComments = () => {
                   <input 
                     type="text" 
                     className="form-control" 
-                    placeholder="Tu Nombre*"
+                    placeholder={labels.yourName}
                     value={newComment.userName}
-                    onChange={(e) => setNewComment({ ...newComment, userName: e.target.value })}
+                    onChange={(e) => handleInputChange('userName', e.target.value)}
                     required
                   />
                 </div>
@@ -126,9 +69,9 @@ const CarComments = () => {
                   <input 
                     type="email" 
                     className="form-control" 
-                    placeholder="Tu Email*"
+                    placeholder={labels.yourEmail}
                     value={newComment.userEmail}
-                    onChange={(e) => setNewComment({ ...newComment, userEmail: e.target.value })}
+                    onChange={(e) => handleInputChange('userEmail', e.target.value)}
                     required
                   />
                 </div>
@@ -138,14 +81,14 @@ const CarComments = () => {
                   <textarea 
                     className="form-control" 
                     rows="5" 
-                    placeholder="Tu Comentario*"
+                    placeholder={labels.yourComment}
                     value={newComment.comment}
-                    onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+                    onChange={(e) => handleInputChange('comment', e.target.value)}
                     required
                   />
                 </div>
                 <button type="submit" className="theme-btn">
-                  <i className="far fa-paper-plane"></i> Enviar Comentario
+                  <i className="far fa-paper-plane"></i> {labels.submitComment}
                 </button>
               </div>
             </div>

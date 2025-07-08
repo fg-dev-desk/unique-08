@@ -5,16 +5,14 @@ import CarInfo from './CarInfo/CarInfo';
 import CarTabs from './CarTabs/CarTabs';
 import RelatedCars from './RelatedCars/RelatedCars';
 import Breadcrumb from '../../components/ui/Breadcrumb';
-import { detailConfig } from './detailConfig';
+import detailData from './detailData.json';
 
 const Detail = () => {
-  const { data } = detailConfig;
-  
   return (
     <>
       <Breadcrumb 
-        title={data.breadcrumb.title} 
-        currentPage={data.breadcrumb.currentPage}
+        title={detailData.breadcrumb.title} 
+        currentPage={detailData.breadcrumb.currentPage}
       />
       
       {/* car single */}

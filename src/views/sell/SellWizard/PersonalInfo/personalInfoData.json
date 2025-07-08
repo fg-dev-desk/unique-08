@@ -1,0 +1,23 @@
+{
+  "title": "Información Personal",
+  "fields": {
+    "nombre": {
+      "label": "Nombre completo",
+      "placeholder": "Ej: Juan Pérez"
+    },
+    "email": {
+      "label": "Correo electrónico",
+      "placeholder": "Ej: juan@email.com"
+    },
+    "telefono": {
+      "label": "Teléfono",
+      "placeholder": "Ej: +1 234 567 8900"
+    }
+  },
+  "validation": {
+    "nombreRequired": "El nombre es requerido",
+    "emailRequired": "El email es requerido",
+    "emailInvalid": "El email no es válido",
+    "telefonoRequired": "El teléfono es requerido"
+  }
+}

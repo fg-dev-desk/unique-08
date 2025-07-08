@@ -1,187 +1,43 @@
-import React, { useState } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-
+import React from 'react';
 import ProfileLayout from '../ProfileLayout/ProfileLayout';
+import { useProfileSettings } from './useProfileSettings';
+import profileSettingsData from './profileSettingsData.json';
 
 const Settings = () => {
-  const { user } = useSelector(state => state.userReducer);
-  const dispatch = useDispatch();
+  const {
+    profileData,
+    passwordData,
+    profileErrors,
+    passwordErrors,
+    isUpdatingProfile,
+    isChangingPassword,
+    handleProfileChange,
+    handlePasswordChange,
+    handleProfileSubmit,
+    handlePasswordSubmit
+  } = useProfileSettings();
 
-  // Profile Update Form State
-  const [profileData, setProfileData] = useState({
-    firstName: user?.nombre?.split(' ')[0] || '',
-    lastName: user?.nombre?.split(' ')[1] || '',
-    email: user?.email || '',
-    phone: user?.telefono || '',
-    address: user?.direccion || ''
-  });
-
-  // Password Change Form State
-  const [passwordData, setPasswordData] = useState({
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  });
-
-  const [profileErrors, setProfileErrors] = useState({});
-  const [passwordErrors, setPasswordErrors] = useState({});
-  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
-
-  const handleProfileChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    if (profileErrors[name]) {
-      setProfileErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    const { name, value } = e.target;
-    setPasswordData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    if (passwordErrors[name]) {
-      setPasswordErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-
-  const validateProfileForm = () => {
-    const errors = {};
-    
-    if (!profileData.firstName) {
-      errors.firstName = 'First name is required';
-    }
-    
-    if (!profileData.lastName) {
-      errors.lastName = 'Last name is required';
-    }
-    
-    if (!profileData.email) {
-      errors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(profileData.email)) {
-      errors.email = 'Email is invalid';
-    }
-    
-    return errors;
-  };
-
-  const validatePasswordForm = () => {
-    const errors = {};
-    
-    if (!passwordData.oldPassword) {
-      errors.oldPassword = 'Current password is required';
-    }
-    
-    if (!passwordData.newPassword) {
-      errors.newPassword = 'New password is required';
-    } else if (passwordData.newPassword.length < 6) {
-      errors.newPassword = 'Password must be at least 6 characters';
-    }
-    
-    if (!passwordData.confirmPassword) {
-      errors.confirmPassword = 'Confirm password is required';
-    } else if (passwordData.newPassword !== passwordData.confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
-    }
-    
-    return errors;
-  };
-
-  const handleProfileSubmit = async (e) => {
-    e.preventDefault();
-    const errors = validateProfileForm();
-    
-    if (Object.keys(errors).length === 0) {
-      setIsUpdatingProfile(true);
-      try {
-        // TODO: Dispatch update profile action
-        const updateData = {
-          nombre: `${profileData.firstName} ${profileData.lastName}`,
-          email: profileData.email,
-          telefono: profileData.phone,
-          direccion: profileData.address
-        };
-        console.log('Update profile:', updateData);
-        
-        // Simulate API call
-        setTimeout(() => {
-          setIsUpdatingProfile(false);
-          alert('Profile updated successfully!');
-        }, 2000);
-      } catch (error) {
-        setIsUpdatingProfile(false);
-        console.error('Error updating profile:', error);
-      }
-    } else {
-      setProfileErrors(errors);
-    }
-  };
-
-  const handlePasswordSubmit = async (e) => {
-    e.preventDefault();
-    const errors = validatePasswordForm();
-    
-    if (Object.keys(errors).length === 0) {
-      setIsChangingPassword(true);
-      try {
-        // TODO: Dispatch change password action
-        console.log('Change password:', {
-          oldPassword: passwordData.oldPassword,
-          newPassword: passwordData.newPassword
-        });
-        
-        // Simulate API call
-        setTimeout(() => {
-          setIsChangingPassword(false);
-          setPasswordData({
-            oldPassword: '',
-            newPassword: '',
-            confirmPassword: ''
-          });
-          alert('Password changed successfully!');
-        }, 2000);
-      } catch (error) {
-        setIsChangingPassword(false);
-        console.error('Error changing password:', error);
-      }
-    } else {
-      setPasswordErrors(errors);
-    }
-  };
+  const { labels, placeholders, validation } = profileSettingsData;
 
   return (
-    <ProfileLayout title="Settings">
+    <ProfileLayout title={labels.settings}>
       {/* Update Profile Form */}
       <div className="user-profile-card">
         <div className="user-profile-card-title">
-          <h4>Update Profile Info</h4>
+          <h4>{labels.updateProfileInfo}</h4>
         </div>
-        <form className="user-profile-form" onSubmit={handleProfileSubmit}>
+        <form className="user-profile-form" onSubmit={(e) => handleProfileSubmit(e, validation, labels)}>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-                <label>First Name</label>
+                <label>{labels.firstName}</label>
                 <input
                   type="text"
                   className="form-control"
                   name="firstName"
                   value={profileData.firstName}
                   onChange={handleProfileChange}
-                  placeholder="First Name"
+                  placeholder={placeholders.firstName}
                   disabled={isUpdatingProfile}
                 />
                 {profileErrors.firstName && (
@@ -259,11 +115,11 @@ const Settings = () => {
           >
             {isUpdatingProfile ? (
               <>
-                <i className="far fa-spinner fa-spin"></i> Updating...
+                <i className="far fa-spinner fa-spin"></i> {labels.updating}
               </>
             ) : (
               <>
-                Update Profile Info <i className="far fa-user"></i>
+                {labels.updateProfile} <i className="far fa-user"></i>
               </>
             )}
           </button>
@@ -273,18 +129,18 @@ const Settings = () => {
       {/* Change Password Form */}
       <div className="user-profile-card">
         <div className="user-profile-card-title">
-          <h4>Change Password</h4>
+          <h4>{labels.changePassword}</h4>
         </div>
-        <form className="user-profile-form" onSubmit={handlePasswordSubmit}>
+        <form className="user-profile-form" onSubmit={(e) => handlePasswordSubmit(e, validation, labels)}>
           <div className="form-group">
-            <label>Old Password</label>
+            <label>{labels.oldPassword}</label>
             <input
               type="password"
               className="form-control"
               name="oldPassword"
               value={passwordData.oldPassword}
               onChange={handlePasswordChange}
-              placeholder="Old Password"
+              placeholder={placeholders.oldPassword}
               disabled={isChangingPassword}
             />
             {passwordErrors.oldPassword && (
@@ -328,11 +184,11 @@ const Settings = () => {
           >
             {isChangingPassword ? (
               <>
-                <i className="far fa-spinner fa-spin"></i> Changing...
+                <i className="far fa-spinner fa-spin"></i> {labels.changing}
               </>
             ) : (
               <>
-                Change Password <i className="far fa-key"></i>
+                {labels.changePasswordAction} <i className="far fa-key"></i>
               </>
             )}
           </button>

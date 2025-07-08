@@ -1,0 +1,179 @@
+{
+  "breadcrumb": {
+    "title": "Detalle de Subasta",
+    "currentPage": "Detalle de Subasta"
+  },
+  "labels": {
+    "activeAuction": "Subasta Activa",
+    "auctionEnded": "Subasta Terminada",
+    "timeRemaining": "Tiempo Restante",
+    "currentBid": "/ puja actual",
+    "placeBid": "Hacer Puja",
+    "submitBid": "Enviar Puja",
+    "bidAmount": "Monto de Puja",
+    "bidHistory": "Historial de Ofertas",
+    "auctionTerms": "Términos de Subasta",
+    "seller": "Vendedor",
+    "transferFee": "Comisión de Transferencia",
+    "dispositionFee": "Comisión de Disposición",
+    "shareAuction": "Compartir Subasta",
+    "viewAuction": "Ver Más",
+    "carDetails": "Detalles del Vehículo",
+    "model": "Modelo",
+    "people": "Personas",
+    "customerReviews": "4 Reseñas de Clientes",
+    "youMayLike": "También Te Puede Interesar",
+    "viewMore": "Ver Más",
+    "loading": "Cargando...",
+    "loginToParticipate": "Inicia sesión para participar en la subasta",
+    "loginMessage": "Para realizar ofertas y ver el historial de pujas completo, debes iniciar sesión.",
+    "loginButton": "Iniciar Sesión",
+    "registerButton": "Registrarse",
+    "bidNow": "Pujar Ahora"
+  },
+  "tabs": {
+    "description": "Descripción",
+    "additionalInfo": "Información Adicional", 
+    "bidHistory": "Historial de Ofertas"
+  },
+  "placeholders": {
+    "bidAmount": "Ingresa tu puja (mínimo $251,000)",
+    "yourName": "Tu Nombre*",
+    "yourEmail": "Tu Email*",
+    "comment": "Comentario (opcional)"
+  },
+  "content": {
+    "descriptionText": "Este vehículo se encuentra en excelente estado de conservación. Ha sido mantenido regularmente y cuenta con todos los servicios al día. Ideal para uso personal o familiar. La subasta incluye documentación completa y transferencia de propiedad.",
+    "additionalInfoText": "Vehículo verificado por nuestros expertos. Incluye garantía de 3 meses en motor y transmisión. La puja ganadora debe completar el pago en un plazo máximo de 48 horas. Se aceptan financiamientos bancarios y pagos de contado.",
+    "bidHistory": [
+      {
+        "bidder": "Carlos Martínez",
+        "date": "17 Marzo, 2024",
+        "amount": "$248,000",
+        "comment": "Excelente vehículo, muy interesado en adquirirlo.",
+        "avatar": "/assets/img/blog/com-1.jpg"
+      },
+      {
+        "bidder": "Ana Rodríguez", 
+        "date": "17 Marzo, 2024",
+        "amount": "$245,000",
+        "comment": "Me parece una gran oportunidad de inversión.",
+        "avatar": "/assets/img/blog/com-2.jpg"
+      },
+      {
+        "bidder": "Miguel Torres",
+        "date": "16 Marzo, 2024", 
+        "amount": "$240,000",
+        "comment": "Vehículo en muy buen estado, dispuesto a pujar.",
+        "avatar": "/assets/img/blog/com-3.jpg"
+      }
+    ],
+    "relatedCars": [
+      {
+        "name": "Honda Civic 2021",
+        "model": "2021",
+        "capacity": "5",
+        "fuel": "Híbrido",
+        "efficiency": "16.2km / 1-litro",
+        "transmission": "Automático",
+        "price": 280000,
+        "rating": "5.0",
+        "image": "/assets/img/car/02.jpg"
+      },
+      {
+        "name": "Nissan Sentra 2020",
+        "model": "2020", 
+        "capacity": "5",
+        "fuel": "Gasolina",
+        "efficiency": "14.8km / 1-litro",
+        "transmission": "Automático",
+        "price": 220000,
+        "rating": "4.8",
+        "image": "/assets/img/car/03.jpg"
+      },
+      {
+        "name": "Mazda 3 2022",
+        "model": "2022",
+        "capacity": "5", 
+        "fuel": "Híbrido",
+        "efficiency": "17.1km / 1-litro",
+        "transmission": "Automático",
+        "price": 320000,
+        "rating": "5.0",
+        "image": "/assets/img/car/04.jpg"
+      }
+    ]
+  },
+  "socialSharing": {
+    "platforms": [
+      {
+        "name": "facebook",
+        "icon": "fab fa-facebook",
+        "href": "#"
+      },
+      {
+        "name": "twitter",
+        "icon": "fab fa-twitter",
+        "href": "#"
+      },
+      {
+        "name": "linkedin",
+        "icon": "fab fa-linkedin-in",
+        "href": "#"
+      },
+      {
+        "name": "youtube",
+        "icon": "fab fa-youtube",
+        "href": "#"
+      }
+    ]
+  },
+  "carDetailsFields": [
+    {
+      "field": "modelo",
+      "label": "Modelo",
+      "icon": "far fa-car"
+    },
+    {
+      "field": "capacidad",
+      "label": "Capacidad",
+      "icon": "far fa-user-tie",
+      "suffix": " Personas"
+    },
+    {
+      "field": "tipoCombustible",
+      "label": "Combustible",
+      "icon": "far fa-gas-pump"
+    },
+    {
+      "field": "rendimiento",
+      "label": "Rendimiento",
+      "icon": "far fa-road"
+    },
+    {
+      "field": "transmision",
+      "label": "Transmisión",
+      "icon": "far fa-steering-wheel"
+    }
+  ],
+  "carTermsFields": [
+    {
+      "field": "vendedor",
+      "label": "Vendedor"
+    },
+    {
+      "field": "comisionTransferencia",
+      "label": "Comisión de Transferencia",
+      "format": "currency"
+    },
+    {
+      "field": "comisionDisposicion",
+      "label": "Comisión de Disposición",
+      "format": "currency"
+    },
+    {
+      "field": "ubicacion",
+      "label": "Ubicación"
+    }
+  ]
+}

@@ -1,43 +1,46 @@
 import React from 'react';
-
-import { photosInfoConfig } from './photosInfoConfig';
+import { usePhotosInfo } from './usePhotosInfo';
+import photosInfoData from './photosInfoData.json';
 
 const PhotosInfo = ({ formData, updateFormData }) => {
-  // config
-  const { data } = photosInfoConfig;
-
-  // handlers
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length > 0) {
-      updateFormData('images', [...formData.images, ...files].slice(0, 5));
-    }
-  };
-
-  const removeImage = (index) => {
-    const newImages = formData.images.filter((_, i) => i !== index);
-    updateFormData('images', newImages);
-  };
+  const {
+    dragActive,
+    handleImageUpload,
+    removeImage,
+    handleDrop,
+    handleDragOver,
+    handleDragEnter,
+    handleDragLeave,
+    getRemainingSlots
+  } = usePhotosInfo({ formData, updateFormData });
 
   return (
     <div className="row">
       <div className="col-md-12 mb-4">
         <h5 className="mb-3">
           <i className="fas fa-camera me-2"></i>
-          {data.title}
+          {photosInfoData.title}
         </h5>
         <p className="text-muted">
-          {data.description}
+          {photosInfoData.description}
         </p>
       </div>
       
       {/* Upload Area */}
       <div className="col-md-12">
-        <div className="upload-area">
+        <div 
+          className={`upload-area ${dragActive ? 'drag-active' : ''}`}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+        >
           <div className="upload-content">
             <i className="fas fa-cloud-upload-alt"></i>
-            <h5>{data.uploadArea.title}</h5>
-            <p>{data.uploadArea.subtitle}</p>
+            <h5>{photosInfoData.uploadArea.title}</h5>
+            <p>{photosInfoData.uploadArea.subtitle}</p>
+            <p className="text-muted small">{photosInfoData.uploadArea.formats}</p>
+            <p className="text-muted small">{photosInfoData.uploadArea.maxFiles} ({getRemainingSlots()} restantes)</p>
             <input
               type="file"
               multiple
@@ -50,9 +53,9 @@ const PhotosInfo = ({ formData, updateFormData }) => {
       </div>
 
       {/* Preview Images */}
-      {formData.images.length > 0 && (
+      {formData.images && formData.images.length > 0 && (
         <div className="col-md-12 mt-4">
-          <h6>{data.preview.title}</h6>
+          <h6>{photosInfoData.preview.title}</h6>
           <div className="row">
             {formData.images.map((image, index) => (
               <div key={index} className="col-md-3 mb-3">
@@ -79,17 +82,17 @@ const PhotosInfo = ({ formData, updateFormData }) => {
       {/* Summary */}
       <div className="col-md-12 mt-4">
         <div className="summary-card">
-          <h6><i className="fas fa-check-circle me-2"></i>{data.summary.title}</h6>
+          <h6><i className="fas fa-check-circle me-2"></i>{photosInfoData.summary.title}</h6>
           <div className="row">
             <div className="col-md-6">
-              <p><strong>{data.summary.fields.vendedor}:</strong> {formData.nombre}</p>
-              <p><strong>{data.summary.fields.email}:</strong> {formData.email}</p>
-              <p><strong>{data.summary.fields.telefono}:</strong> {formData.telefono}</p>
+              <p><strong>{photosInfoData.summary.fields.vendedor}:</strong> {formData.nombre}</p>
+              <p><strong>{photosInfoData.summary.fields.email}:</strong> {formData.email}</p>
+              <p><strong>{photosInfoData.summary.fields.telefono}:</strong> {formData.telefono}</p>
             </div>
             <div className="col-md-6">
-              <p><strong>{data.summary.fields.vehiculo}:</strong> {formData.marca} {formData.modelo} {formData.año}</p>
-              <p><strong>{data.summary.fields.precio}:</strong> ${formData.precio}</p>
-              <p><strong>{data.summary.fields.fotos}:</strong> {formData.images.length}</p>
+              <p><strong>{photosInfoData.summary.fields.vehiculo}:</strong> {formData.marca} {formData.modelo} {formData.año}</p>
+              <p><strong>{photosInfoData.summary.fields.precio}:</strong> ${formData.precio}</p>
+              <p><strong>{photosInfoData.summary.fields.fotos}:</strong> {formData.images ? formData.images.length : 0}</p>
             </div>
           </div>
         </div>

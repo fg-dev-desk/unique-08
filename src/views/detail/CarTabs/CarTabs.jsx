@@ -1,35 +1,25 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { carTabsConfig } from './carTabsConfig';
-import { detailConfig } from '../detailConfig';
-import { useCarDetail } from '../hooks/useCarDetail';
-import { consLogged } from '../../../const/consLogged';
+import { useCarTabs } from './useCarTabs';
+import detailData from '../detailData.json';
 
 const CarTabs = () => {
-  // hooks
-  const { car } = useCarDetail();
-  const [activeTab, setActiveTab] = useState('description');
-  
-  // config
-  const { data } = carTabsConfig;
-  const { helpers } = detailConfig;
-  
-  // redux state
-  const { logged } = useSelector(state => state.userReducer);
-  const isAuthenticated = logged === consLogged.LOGGED;
+  const {
+    car,
+    activeTab,
+    setActiveTab,
+    isAuthenticated,
+    formatPrice,
+    timeLeft,
+    isActive,
+    detallesVehiculo,
+    infoAdicional,
+    getColumnSpecs,
+    calculateMinimumBid
+  } = useCarTabs();
 
   if (!car) return null;
-
-  const timeLeft = helpers.getTimeLeft(car.fechaFin);
-  const isActive = timeLeft !== 'Subasta terminada';
-
-  // Agrupar especificaciones por categoría desde car.valores
-  const detallesVehiculoCampos = [
-    'Marca', 'Version', 'Submarca', 'Modelo', 'Origen', 'Carrocería', 'Edición Especial', 'Pais de Origen', 'Combustible', 'Transmision', 'Km', 'No Dueños', 'Motor', 'Color', 'Potencia', 'Torque', 'Cilindrada', 'Velocidad Máxima', 'Aceleración', 'Tipo de Tracción', 'Suspensión', 'Frenos'
-  ];
-  const detallesVehiculo = car && car.valores ? car.valores.filter(spec => detallesVehiculoCampos.includes(spec.campo)) : [];
-  const infoAdicional = car && car.valores ? car.valores.filter(spec => !detallesVehiculoCampos.includes(spec.campo)) : [];
 
   return (
     <div className="container">
@@ -45,7 +35,7 @@ const CarTabs = () => {
               aria-controls="tab1" 
               aria-selected={activeTab === 'description'}
             >
-              Descripción
+              {detailData.tabs.description}
             </button>
             <button 
               className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`}
@@ -56,7 +46,7 @@ const CarTabs = () => {
               aria-controls="tab2" 
               aria-selected={activeTab === 'additional'}
             >
-              Información Adicional
+              {detailData.tabs.additionalInfo}
             </button>
             <button 
               className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`}
@@ -78,7 +68,7 @@ const CarTabs = () => {
               aria-controls="tab4" 
               aria-selected={activeTab === 'bidding'}
             >
-              Historial de Ofertas (08)
+              {detailData.tabs.bidHistory} (08)
             </button>
           </div>
         </nav>
@@ -93,7 +83,7 @@ const CarTabs = () => {
                     <div className="col-md-6">
                       <h5>Especificaciones técnicas</h5>
                       <ul className="list-unstyled">
-                        {detallesVehiculo.slice(0, Math.ceil(detallesVehiculo.length / 2)).map(spec => (
+                        {getColumnSpecs(detallesVehiculo, 'left').map(spec => (
                           <li key={spec.campo} className="mb-1">
                             <strong>{spec.campo}:</strong> {spec.valor}
                           </li>
@@ -103,7 +93,7 @@ const CarTabs = () => {
                     <div className="col-md-6">
                       <h5>Características adicionales</h5>
                       <ul className="list-unstyled">
-                        {detallesVehiculo.slice(Math.ceil(detallesVehiculo.length / 2)).map(spec => (
+                        {getColumnSpecs(detallesVehiculo, 'right').map(spec => (
                           <li key={spec.campo} className="mb-1">
                             <strong>{spec.campo}:</strong> {spec.valor}
                           </li>
@@ -113,7 +103,7 @@ const CarTabs = () => {
                   </div>
                 ) : (
                   <p>
-                    Este vehículo se encuentra en excelente estado de conservación. Ha sido mantenido regularmente y cuenta con todos los servicios al día. Ideal para uso personal o familiar. La subasta incluye documentación completa y transferencia de propiedad.
+                    {detailData.content.descriptionText}
                   </p>
                 )}
               </div>
@@ -128,7 +118,7 @@ const CarTabs = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <ul className="list-unstyled">
-                        {infoAdicional.slice(0, Math.ceil(infoAdicional.length / 2)).map(spec => (
+                        {getColumnSpecs(infoAdicional, 'left').map(spec => (
                           <li key={spec.campo} className="mb-2">
                             <strong>{spec.campo}:</strong> {spec.valor}
                           </li>
@@ -137,7 +127,7 @@ const CarTabs = () => {
                     </div>
                     <div className="col-md-6">
                       <ul className="list-unstyled">
-                        {infoAdicional.slice(Math.ceil(infoAdicional.length / 2)).map(spec => (
+                        {getColumnSpecs(infoAdicional, 'right').map(spec => (
                           <li key={spec.campo} className="mb-2">
                             <strong>{spec.campo}:</strong> {spec.valor}
                           </li>
@@ -240,29 +230,29 @@ const CarTabs = () => {
                         <i className="fas fa-info-circle fs-2 mb-3"></i>
                         <h5>Inicia sesión para comentar</h5>
                         <p className="mb-3">Para dejar comentarios necesitas tener una cuenta activa</p>
-                        <a href="/login" className="theme-btn me-2">
-                          <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
-                        </a>
-                        <a href="/register" className="theme-btn theme-btn-outline">
-                          <i className="fas fa-user-plus"></i> Registrarse
-                        </a>
+                        <Link to="/login" className="theme-btn me-2">
+                          <i className="fas fa-sign-in-alt"></i> {detailData.labels.loginButton}
+                        </Link>
+                        <Link to="/register" className="theme-btn theme-btn-outline">
+                          <i className="fas fa-user-plus"></i> {detailData.labels.registerButton}
+                        </Link>
                       </div>
                     ) : (
                       <form>
                         <div className="row">
                           <div className="col-md-6">
                             <div className="form-group">
-                              <input type="text" className="form-control" placeholder="Tu Nombre*" />
+                              <input type="text" className="form-control" placeholder={detailData.placeholders.yourName} />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group">
-                              <input type="email" className="form-control" placeholder="Tu Email*" />
+                              <input type="email" className="form-control" placeholder={detailData.placeholders.yourEmail} />
                             </div>
                           </div>
                           <div className="col-md-12">
                             <div className="form-group">
-                              <textarea className="form-control" rows="5" placeholder="Tu Comentario*" />
+                              <textarea className="form-control" rows="5" placeholder={detailData.placeholders.comment} />
                             </div>
                             <button type="submit" className="theme-btn">
                               <i className="far fa-paper-plane"></i> Enviar Comentario
@@ -288,15 +278,15 @@ const CarTabs = () => {
                     <div className="row">
                       <div className="col-md-3">
                         <strong>Puja Actual:</strong><br />
-                        <span className="text-primary fs-5">{helpers.formatPrice(car.precio)}</span>
+                        <span className="text-primary fs-5">{formatPrice(car.precio)}</span>
                       </div>
                       <div className="col-md-3">
                         <strong>Puja Inicial:</strong><br />
-                        <span>{helpers.formatPrice(car.precioInicial || car.precio)}</span>
+                        <span>{formatPrice(car.precioInicial || car.precio)}</span>
                       </div>
                       <div className="col-md-3">
                         <strong>Precio Reserva:</strong><br />
-                        <span>{helpers.formatPrice(car.precioReserva || car.precio)}</span>
+                        <span>{formatPrice(car.precioReserva || car.precio)}</span>
                       </div>
                       <div className="col-md-3">
                         <strong>Tiempo Restante:</strong><br />
@@ -312,7 +302,7 @@ const CarTabs = () => {
                         <h5>Usuario***23</h5>
                         <span><i className="far fa-clock"></i> 15/03/2024 14:30</span>
                         <p>
-                          <strong>Monto de la puja: {helpers.formatPrice(28500000)}</strong>
+                          <strong>Monto de la puja: {formatPrice(28500000)}</strong>
                           <span className="text-success ms-2">
                             <i className="fas fa-trophy"></i> Puja ganadora actual
                           </span>
@@ -325,7 +315,7 @@ const CarTabs = () => {
                       <div className="blog-comments-content">
                         <h5>Usuario***67</h5>
                         <span><i className="far fa-clock"></i> 15/03/2024 14:28</span>
-                        <p><strong>Monto de la puja: {helpers.formatPrice(28000000)}</strong></p>
+                        <p><strong>Monto de la puja: {formatPrice(28000000)}</strong></p>
                       </div>
                     </div>
                     
@@ -334,7 +324,7 @@ const CarTabs = () => {
                       <div className="blog-comments-content">
                         <h5>Usuario***45</h5>
                         <span><i className="far fa-clock"></i> 15/03/2024 14:25</span>
-                        <p><strong>Monto de la puja: {helpers.formatPrice(27500000)}</strong></p>
+                        <p><strong>Monto de la puja: {formatPrice(27500000)}</strong></p>
                       </div>
                     </div>
                     
@@ -343,7 +333,7 @@ const CarTabs = () => {
                       <div className="blog-comments-content">
                         <h5>Usuario***89</h5>
                         <span><i className="far fa-clock"></i> 15/03/2024 14:22</span>
-                        <p><strong>Monto de la puja: {helpers.formatPrice(27000000)}</strong></p>
+                        <p><strong>Monto de la puja: {formatPrice(27000000)}</strong></p>
                       </div>
                     </div>
                   </div>
@@ -356,40 +346,40 @@ const CarTabs = () => {
                           <i className="fas fa-sign-in-alt fs-2 mb-3"></i>
                           <h5>Debes ingresar para hacer una oferta</h5>
                           <p className="mb-3">Para participar en las subastas necesitas tener una cuenta activa</p>
-                          <a href="/login" className="theme-btn me-2">
-                            <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
-                          </a>
-                          <a href="/register" className="theme-btn theme-btn-outline">
-                            <i className="fas fa-user-plus"></i> Registrarse
-                          </a>
+                          <Link to="/login" className="theme-btn me-2">
+                            <i className="fas fa-sign-in-alt"></i> {detailData.labels.loginButton}
+                          </Link>
+                          <Link to="/register" className="theme-btn theme-btn-outline">
+                            <i className="fas fa-user-plus"></i> {detailData.labels.registerButton}
+                          </Link>
                         </div>
                       ) : (
                         <div>
                           <div className="alert alert-info">
                             <i className="fas fa-info-circle"></i> 
-                            Tu puja debe ser mayor a {helpers.formatPrice(car.precio)}. Incremento mínimo: $500,000
+                            Tu puja debe ser mayor a {formatPrice(car.precio)}. Incremento mínimo: $500,000
                           </div>
                           
                           <form>
                             <div className="row">
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="text" className="form-control" placeholder="Tu Nombre*" />
+                                  <input type="text" className="form-control" placeholder={detailData.placeholders.yourName} />
                                 </div>
                               </div>
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="email" className="form-control" placeholder="Tu Email*" />
+                                  <input type="email" className="form-control" placeholder={detailData.placeholders.yourEmail} />
                                 </div>
                               </div>
                               <div className="col-md-12">
                                 <div className="form-group">
-                                  <label>Monto de la Puja</label>
+                                  <label>{detailData.labels.bidAmount}</label>
                                   <input 
                                     type="number" 
                                     className="form-control" 
-                                    placeholder={`Mínimo: ${helpers.formatPrice(car.precio + 500000)}`}
-                                    min={car.precio + 500000}
+                                    placeholder={`Mínimo: ${formatPrice(calculateMinimumBid())}`}
+                                    min={calculateMinimumBid()}
                                     step="500000"
                                   />
                                 </div>
@@ -399,11 +389,11 @@ const CarTabs = () => {
                                   <textarea 
                                     className="form-control" 
                                     rows="3" 
-                                    placeholder="Comentario opcional sobre tu puja..."
+                                    placeholder={detailData.placeholders.comment}
                                   />
                                 </div>
                                 <button type="submit" className="theme-btn">
-                                  <i className="fas fa-gavel"></i> Realizar Puja
+                                  <i className="fas fa-gavel"></i> {detailData.labels.placeBid}
                                 </button>
                               </div>
                             </div>

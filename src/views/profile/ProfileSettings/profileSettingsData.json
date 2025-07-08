@@ -1,0 +1,42 @@
+{
+  "labels": {
+    "settings": "Settings",
+    "updateProfileInfo": "Update Profile Info",
+    "changePassword": "Change Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "reTypePassword": "Re-Type Password",
+    "updateProfile": "Update Profile Info",
+    "changePasswordAction": "Change Password",
+    "updating": "Updating...",
+    "changing": "Changing...",
+    "profileUpdatedSuccessfully": "Profile updated successfully!",
+    "passwordChangedSuccessfully": "Password changed successfully!"
+  },
+  "placeholders": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "reTypePassword": "Re-Type Password"
+  },
+  "validation": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email is invalid",
+    "currentPasswordRequired": "Current password is required",
+    "newPasswordRequired": "New password is required",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "confirmPasswordRequired": "Confirm password is required",
+    "passwordsDoNotMatch": "Passwords do not match"
+  }
+}
