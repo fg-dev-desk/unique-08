@@ -1,25 +1,18 @@
 import React from 'react';
 
-// data
-const heroData = {
-  title: "About Us",
-  backgroundImage: "assets/img/breadcrumb/01.jpg",
-  breadcrumbItems: [
-    { label: 'Home', path: 'index.html' },
-    { label: 'About Us', path: '/about', active: true }
-  ]
-};
+import { useHeroSection } from './useHeroSection';
 
 const HeroSection = () => {
-  // render
+  const { heroHelpers, heroData } = useHeroSection();
+
   return (
-    <div className="site-breadcrumb" style={{ background: `url(${heroData.backgroundImage})` }}>
+    <div className="site-breadcrumb" style={{ background: heroHelpers.getBreadcrumbStyle(heroData.backgroundImage) }}>
       <div className="container">
         <h2 className="breadcrumb-title">{heroData.title}</h2>
         <ul className="breadcrumb-menu">
           {heroData.breadcrumbItems.map((item, index) => (
-            <li key={index} className={item.active ? 'active' : ''}>
-              {item.active ? (
+            <li key={index} className={heroHelpers.isActiveBreadcrumb(item) ? 'active' : ''}>
+              {heroHelpers.isActiveBreadcrumb(item) ? (
                 item.label
               ) : (
                 <a href={item.path}>{item.label}</a>
