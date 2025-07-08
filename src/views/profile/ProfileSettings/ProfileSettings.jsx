@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import ProfileLayout from '../ProfileLayout';
+import ProfileLayout from '../ProfileLayout/ProfileLayout';
 
 const Settings = () => {
   const { user } = useSelector(state => state.userReducer);

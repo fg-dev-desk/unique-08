@@ -1,0 +1,47 @@
+{
+  "title": "My Car Listing",
+  "cardTitle": "My Car Listing",
+  "confirmRemove": "Are you sure you want to remove this listing?",
+  "tableHeaders": [
+    "Car",
+    "Year",
+    "Transmission",
+    "Fuel Type",
+    "Price",
+    "Action"
+  ],
+  "actions": {
+    "view": "View",
+    "edit": "Edit",
+    "remove": "Remove"
+  },
+  "mockData": [
+    {
+      "id": 1,
+      "image": "/assets/img/car/01.jpg",
+      "name": "Toyota Sports Car",
+      "year": 2020,
+      "transmission": "Automatic",
+      "fuelType": "Hybrid",
+      "price": "$600"
+    },
+    {
+      "id": 2,
+      "image": "/assets/img/car/02.jpg",
+      "name": "BMW X5 2021",
+      "year": 2021,
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "price": "$800"
+    },
+    {
+      "id": 3,
+      "image": "/assets/img/car/03.jpg",
+      "name": "Mercedes C-Class",
+      "year": 2019,
+      "transmission": "Manual",
+      "fuelType": "Diesel",
+      "price": "$750"
+    }
+  ]
+}

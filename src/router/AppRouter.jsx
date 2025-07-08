@@ -11,11 +11,11 @@ import Detail from "../views/detail/Detail";
 import LoginSection from "../views/auth/LoginSection/LoginSection";
 import RegisterSection from "../views/auth/RegisterSection/RegisterSection";
 import Profile from "../views/profile/Profile";
-import ProfileSettings from "../views/profile/ProfileSettings";
-import BillingInfo from "../views/profile/BillingInfo";
-import MyListings from "../views/profile/MyListings";
-import Transactions from "../views/profile/Transactions";
-import Favorites from "../views/profile/Favorites";
+import ProfileSettingsPage from "../views/profile/ProfileSettingsPage";
+import BillingInfoPage from "../views/profile/BillingInfoPage";
+import MyListingsPage from "../views/profile/MyListingsPage";
+import TransactionsPage from "../views/profile/TransactionsPage";
+import FavoritesPage from "../views/profile/FavoritesPage";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { startRefreshToken } from "../redux/features/auth/thunks";
@@ -95,7 +95,7 @@ export const AppRouter = () => {
           path="/profile/settings" 
           element={
             <PrivateRoute>
-              <ProfileSettings />
+              <ProfileSettingsPage />
             </PrivateRoute>
           } 
         />
@@ -103,7 +103,7 @@ export const AppRouter = () => {
           path="/profile/billing" 
           element={
             <PrivateRoute>
-              <BillingInfo />
+              <BillingInfoPage />
             </PrivateRoute>
           } 
         />
@@ -111,7 +111,7 @@ export const AppRouter = () => {
           path="/profile/listings" 
           element={
             <PrivateRoute>
-              <MyListings />
+              <MyListingsPage />
             </PrivateRoute>
           } 
         />
@@ -119,7 +119,7 @@ export const AppRouter = () => {
           path="/profile/transactions" 
           element={
             <PrivateRoute>
-              <Transactions />
+              <TransactionsPage />
             </PrivateRoute>
           } 
         />
@@ -127,7 +127,7 @@ export const AppRouter = () => {
           path="/profile/favorites" 
           element={
             <PrivateRoute>
-              <Favorites />
+              <FavoritesPage />
             </PrivateRoute>
           } 
         />

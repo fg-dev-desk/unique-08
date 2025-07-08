@@ -1,0 +1,44 @@
+{
+  "userImage": "/assets/img/user/01.jpg",
+  "defaults": {
+    "userName": "Usuario",
+    "userEmail": "email@example.com"
+  },
+  "confirmLogout": "¿Estás seguro de que deseas cerrar sesión?",
+  "menuItems": [
+    {
+      "path": "/profile",
+      "icon": "far fa-user",
+      "label": "My Profile"
+    },
+    {
+      "path": "/profile/listings",
+      "icon": "far fa-car",
+      "label": "My Car Listing"
+    },
+    {
+      "path": "/profile/favorites",
+      "icon": "far fa-heart",
+      "label": "Favorites"
+    },
+    {
+      "path": "/profile/transactions",
+      "icon": "far fa-repeat",
+      "label": "Transactions"
+    },
+    {
+      "path": "/profile/billing",
+      "icon": "far fa-draw-circle",
+      "label": "Billing Info"
+    },
+    {
+      "path": "/profile/settings",
+      "icon": "far fa-cog",
+      "label": "Settings"
+    }
+  ],
+  "logoutButton": {
+    "icon": "far fa-sign-out",
+    "label": "Logout"
+  }
+}

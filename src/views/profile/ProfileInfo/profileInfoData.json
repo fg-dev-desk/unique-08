@@ -1,0 +1,37 @@
+{
+  "title": "My Profile",
+  "cardTitle": "Profile Information",
+  "fields": [
+    {
+      "label": "Full Name:",
+      "field": "nombre"
+    },
+    {
+      "label": "Email:",
+      "field": "email"
+    },
+    {
+      "label": "Phone:",
+      "field": "telefono"
+    },
+    {
+      "label": "Address:",
+      "field": "direccion"
+    },
+    {
+      "label": "Join Date:",
+      "field": "fechaRegistro",
+      "type": "date"
+    },
+    {
+      "label": "User ID:",
+      "field": "usuarioID",
+      "type": "id"
+    }
+  ],
+  "defaults": {
+    "notProvided": "Not provided",
+    "unknown": "Unknown",
+    "notAvailable": "N/A"
+  }
+}

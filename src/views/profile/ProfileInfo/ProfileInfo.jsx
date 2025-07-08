@@ -1,45 +1,32 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import ProfileLayout from '../ProfileLayout/ProfileLayout';
 
-import ProfileLayout from '../ProfileLayout';
+import { useProfileInfo } from './useProfileInfo';
 
 const ProfileInfo = () => {
-  const { user } = useSelector(state => state.userReducer);
+  const { profileInfoHelpers, profileInfoData } = useProfileInfo();
 
   return (
-    <ProfileLayout title="My Profile">
+    <ProfileLayout title={profileInfoData.title}>
       <div className="user-profile-card">
         <div className="user-profile-card-title">
-          <h4>Profile Information</h4>
+          <h4>{profileInfoData.cardTitle}</h4>
         </div>
         <ul className="profile-info-list">
-          <li>
-            <div className="profile-info-label">Full Name:</div>
-            <div className="profile-info-value">{user?.nombre || 'Not provided'}</div>
-          </li>
-          <li>
-            <div className="profile-info-label">Email:</div>
-            <div className="profile-info-value">{user?.email || 'Not provided'}</div>
-          </li>
-          <li>
-            <div className="profile-info-label">Phone:</div>
-            <div className="profile-info-value">{user?.telefono || 'Not provided'}</div>
-          </li>
-          <li>
-            <div className="profile-info-label">Address:</div>
-            <div className="profile-info-value">{user?.direccion || 'Not provided'}</div>
-          </li>
-          <li>
-            <div className="profile-info-label">Join Date:</div>
-            <div className="profile-info-value">
-              {user?.fechaRegistro ? new Date(user.fechaRegistro).toLocaleDateString() : 'Unknown'}
-            </div>
-          </li>
-          <li>
-            <div className="profile-info-label">User ID:</div>
-            <div className="profile-info-value">{user?.usuarioID || 'N/A'}</div>
-          </li>
+          {profileInfoData.fields.map((field, index) => (
+            <li key={index}>
+              <div className="profile-info-label">{field.label}</div>
+              <div className="profile-info-value">
+                {field.type === 'date' 
+                  ? profileInfoHelpers.formatDate(profileInfoHelpers.getUserValue(field.field))
+                  : field.type === 'id'
+                  ? profileInfoHelpers.getUserId()
+                  : profileInfoHelpers.getUserValue(field.field)
+                }
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </ProfileLayout>

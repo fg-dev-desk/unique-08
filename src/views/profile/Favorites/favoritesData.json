@@ -1,0 +1,57 @@
+{
+  "title": "Favorite",
+  "cardTitle": "Favorite",
+  "confirmRemove": "Remove this car from favorites?",
+  "emptyState": {
+    "title": "No favorite cars yet",
+    "description": "Browse our cars and add them to your favorites!",
+    "buttonText": "Browse Cars",
+    "buttonLink": "/"
+  },
+  "labels": {
+    "model": "Model",
+    "bookNow": "Book Now",
+    "perMonth": "month"
+  },
+  "mockData": [
+    {
+      "id": 1,
+      "image": "/assets/img/car/01.jpg",
+      "name": "Toyota Sports Car",
+      "rating": 5.0,
+      "model": "2020",
+      "people": "4 People",
+      "fuel": "Hybrid",
+      "consumption": "10.15km / 1-litre",
+      "transmission": "Automatic",
+      "price": 390,
+      "period": "month"
+    },
+    {
+      "id": 2,
+      "image": "/assets/img/car/02.jpg",
+      "name": "BMW X5 SUV",
+      "rating": 4.8,
+      "model": "2021",
+      "people": "5 People",
+      "fuel": "Petrol",
+      "consumption": "8.5km / 1-litre",
+      "transmission": "Automatic",
+      "price": 520,
+      "period": "month"
+    },
+    {
+      "id": 3,
+      "image": "/assets/img/car/03.jpg",
+      "name": "Mercedes C-Class",
+      "rating": 4.9,
+      "model": "2019",
+      "people": "4 People",
+      "fuel": "Diesel",
+      "consumption": "12.2km / 1-litre",
+      "transmission": "Manual",
+      "price": 450,
+      "period": "month"
+    }
+  ]
+}

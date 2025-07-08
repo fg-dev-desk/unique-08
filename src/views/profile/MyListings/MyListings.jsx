@@ -1,63 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import ProfileLayout from '../ProfileLayout';
+import ProfileLayout from '../ProfileLayout/ProfileLayout';
 
-const Listings = () => {
-  // Mock data - en producción esto vendría de Redux/API
-  const [listings] = useState([
-    {
-      id: 1,
-      image: '/assets/img/car/01.jpg',
-      name: 'Toyota Sports Car',
-      year: 2020,
-      transmission: 'Automatic',
-      fuelType: 'Hybrid',
-      price: '$600'
-    },
-    {
-      id: 2,
-      image: '/assets/img/car/02.jpg',
-      name: 'BMW X5 2021',
-      year: 2021,
-      transmission: 'Automatic',
-      fuelType: 'Petrol',
-      price: '$800'
-    },
-    {
-      id: 3,
-      image: '/assets/img/car/03.jpg',
-      name: 'Mercedes C-Class',
-      year: 2019,
-      transmission: 'Manual',
-      fuelType: 'Diesel',
-      price: '$750'
-    }
-  ]);
+import { useMyListings } from './useMyListings';
 
-  const handleRemoveListing = (id) => {
-    if (window.confirm('Are you sure you want to remove this listing?')) {
-      // TODO: Dispatch remove listing action
-      console.log('Remove listing:', id);
-    }
-  };
+const MyListings = () => {
+  const { myListingsHelpers, myListingsData, listings } = useMyListings();
 
   return (
-    <ProfileLayout title="My Car Listing">
+    <ProfileLayout title={myListingsData.title}>
       <div className="user-profile-card">
         <div className="user-profile-card-title">
-          <h4>My Car Listing</h4>
+          <h4>{myListingsData.cardTitle}</h4>
         </div>
         <div className="car-table-content">
           <div className="car-table table-responsive">
             <table className="table table-borderless">
               <thead>
                 <tr>
-                  <th scope="col">Car</th>
-                  <th scope="col">Year</th>
-                  <th scope="col">Transmission</th>
-                  <th scope="col">Fuel Type</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Action</th>
+                  {myListingsData.tableHeaders.map((header, index) => (
+                    <th key={index} scope="col">{header}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -66,11 +29,11 @@ const Listings = () => {
                     <td>
                       <div className="car-table-item">
                         <div className="car-table-item-img">
-                          <img src={listing.image} alt={listing.name} />
+                          <img src={myListingsHelpers.getCarImage(listing)} alt={myListingsHelpers.getCarName(listing)} />
                         </div>
                         <div className="car-table-item-content">
                           <h6 className="car-table-item-title">
-                            <a href="#">{listing.name}</a>
+                            <a href="#">{myListingsHelpers.getCarName(listing)}</a>
                           </h6>
                         </div>
                       </div>
@@ -85,7 +48,7 @@ const Listings = () => {
                       <div className="car-table-fuel">{listing.fuelType}</div>
                     </td>
                     <td>
-                      <div className="car-table-price">{listing.price}/day</div>
+                      <div className="car-table-price">{myListingsHelpers.formatPrice(listing.price)}</div>
                     </td>
                     <td>
                       <div className="car-table-action">
@@ -94,7 +57,7 @@ const Listings = () => {
                         <button 
                           type="button"
                           className="car-action-btn"
-                          onClick={() => handleRemoveListing(listing.id)}
+                          onClick={() => myListingsHelpers.handleRemoveListing(listing.id)}
                         >
                           <i className="far fa-trash-can"></i>
                         </button>
@@ -111,4 +74,4 @@ const Listings = () => {
   );
 };
 
-export default Listings;
+export default MyListings;

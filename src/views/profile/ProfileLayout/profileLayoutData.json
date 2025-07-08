@@ -1,0 +1,13 @@
+{
+  "defaultTitle": "My Profile",
+  "breadcrumb": {
+    "home": "Home",
+    "profile": "Profile"
+  },
+  "layout": {
+    "sidebarColumn": "col-lg-3",
+    "contentColumn": "col-lg-9",
+    "containerClass": "user-profile py-120",
+    "wrapperClass": "user-profile-wrapper"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "title": "Transaction",
+  "cardTitle": "Transaction",
+  "tableHeaders": [
+    "Order ID",
+    "Pick Up",
+    "Drop Up",
+    "Duration",
+    "Price",
+    "Status",
+    "Action"
+  ],
+  "actions": {
+    "view": "View"
+  },
+  "mockData": [
+    {
+      "id": "#12345",
+      "pickUp": "New York, USA",
+      "dropUp": "New York, USA",
+      "duration": "1 Months",
+      "price": "$600",
+      "status": "Completed",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "#12346",
+      "pickUp": "Los Angeles, USA",
+      "dropUp": "San Francisco, USA",
+      "duration": "2 Weeks",
+      "price": "$450",
+      "status": "Pending",
+      "date": "2024-01-20"
+    },
+    {
+      "id": "#12347",
+      "pickUp": "Miami, USA",
+      "dropUp": "Orlando, USA",
+      "duration": "5 Days",
+      "price": "$300",
+      "status": "Cancelled",
+      "date": "2024-01-25"
+    },
+    {
+      "id": "#12348",
+      "pickUp": "Chicago, USA",
+      "dropUp": "Detroit, USA",
+      "duration": "3 Days",
+      "price": "$250",
+      "status": "Active",
+      "date": "2024-02-01"
+    }
+  ]
+}
