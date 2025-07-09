@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCarDetail } from '../../../api/api';
+import { getCarDetail } from '../../api/api';
 
 export const useCarDetail = () => {
   const { id } = useParams();

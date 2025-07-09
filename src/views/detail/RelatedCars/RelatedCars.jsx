@@ -3,17 +3,15 @@ import { Link } from 'react-router-dom';
 
 import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { useRelatedCars } from './useRelatedCars';
-import detailData from '../detailData.json';
-
 const RelatedCars = () => {
-  const { relatedCarsToShow, formatPrice, getFutureDate } = useRelatedCars();
+  const { data, relatedCarsToShow, formatPrice, getFutureDate } = useRelatedCars();
 
   return (
     <div className="container">
       <div className="car-related-item pt-80">
         <div className="car-related-item-heading">
-          <h3 className="car-related-item-title">{detailData.labels.youMayLike}</h3>
-          <Link to="/">{detailData.labels.viewMore} <i className="far fa-arrow-right"></i></Link>
+          <h3 className="car-related-item-title">{data.ui.sectionTitle}</h3>
+          <Link to="/">{data.ui.viewMoreText} <i className="far fa-arrow-right"></i></Link>
         </div>
         <div className="row align-items-center">
           {relatedCarsToShow.map((relatedCar, index) => (
@@ -31,8 +29,8 @@ const RelatedCars = () => {
                     <span><i className="fas fa-star"></i> {relatedCar.rating}</span>
                   </div>
                   <ul className="car-list">
-                    <li><i className="far fa-car"></i>{detailData.labels.model}: {relatedCar.model}</li>
-                    <li><i className="far fa-user-tie"></i>{relatedCar.capacity} {detailData.labels.people}</li>
+                    <li><i className="far fa-car"></i>{data.labels.model}: {relatedCar.model}</li>
+                    <li><i className="far fa-user-tie"></i>{relatedCar.capacity} {data.labels.people}</li>
                     <li><i className="far fa-gas-pump"></i>{relatedCar.fuel}</li>
                     <li><i className="far fa-road"></i>{relatedCar.efficiency}</li>
                     <li><i className="far fa-steering-wheel"></i>{relatedCar.transmission}</li>
@@ -40,10 +38,10 @@ const RelatedCars = () => {
                   <div className="car-footer">
                     <span className="car-price">
                       {formatPrice(relatedCar.price)} 
-                      <sub>{detailData.labels.currentBid}</sub>
+                      <sub>{data.labels.currentBid}</sub>
                     </span>
                     <Link to="#" className="car-favorite-btn"><i className="far fa-heart"></i></Link>
-                    <Link to="#" className="theme-btn">{detailData.labels.viewAuction}</Link>
+                    <Link to="#" className="theme-btn">{data.labels.viewAuction}</Link>
                   </div>
                 </div>
               </div>

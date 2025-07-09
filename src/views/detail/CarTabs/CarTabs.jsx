@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useCarTabs } from './useCarTabs';
-import detailData from '../detailData.json';
-
 const CarTabs = () => {
   const {
+    data,
     car,
+    loading,
+    error,
     activeTab,
     setActiveTab,
     isAuthenticated,
@@ -19,7 +20,8 @@ const CarTabs = () => {
     calculateMinimumBid
   } = useCarTabs();
 
-  if (!car) return null;
+  if (loading || !car) return null;
+  if (error) return null;
 
   return (
     <div className="container">
@@ -35,7 +37,7 @@ const CarTabs = () => {
               aria-controls="tab1" 
               aria-selected={activeTab === 'description'}
             >
-              {detailData.tabs.description}
+              {data.tabs.description}
             </button>
             <button 
               className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`}
@@ -46,7 +48,7 @@ const CarTabs = () => {
               aria-controls="tab2" 
               aria-selected={activeTab === 'additional'}
             >
-              {detailData.tabs.additionalInfo}
+              {data.tabs.additionalInfo}
             </button>
             <button 
               className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`}
@@ -68,7 +70,7 @@ const CarTabs = () => {
               aria-controls="tab4" 
               aria-selected={activeTab === 'bidding'}
             >
-              {detailData.tabs.bidHistory} (08)
+              {data.tabs.bidHistory} (08)
             </button>
           </div>
         </nav>
@@ -103,7 +105,7 @@ const CarTabs = () => {
                   </div>
                 ) : (
                   <p>
-                    {detailData.content.descriptionText}
+                    {data.content.descriptionText}
                   </p>
                 )}
               </div>
@@ -231,10 +233,10 @@ const CarTabs = () => {
                         <h5>Inicia sesión para comentar</h5>
                         <p className="mb-3">Para dejar comentarios necesitas tener una cuenta activa</p>
                         <Link to="/login" className="theme-btn me-2">
-                          <i className="fas fa-sign-in-alt"></i> {detailData.labels.loginButton}
+                          <i className="fas fa-sign-in-alt"></i> {data.labels.loginButton}
                         </Link>
                         <Link to="/register" className="theme-btn theme-btn-outline">
-                          <i className="fas fa-user-plus"></i> {detailData.labels.registerButton}
+                          <i className="fas fa-user-plus"></i> {data.labels.registerButton}
                         </Link>
                       </div>
                     ) : (
@@ -242,17 +244,17 @@ const CarTabs = () => {
                         <div className="row">
                           <div className="col-md-6">
                             <div className="form-group">
-                              <input type="text" className="form-control" placeholder={detailData.placeholders.yourName} />
+                              <input type="text" className="form-control" placeholder={data.placeholders.yourName} />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group">
-                              <input type="email" className="form-control" placeholder={detailData.placeholders.yourEmail} />
+                              <input type="email" className="form-control" placeholder={data.placeholders.yourEmail} />
                             </div>
                           </div>
                           <div className="col-md-12">
                             <div className="form-group">
-                              <textarea className="form-control" rows="5" placeholder={detailData.placeholders.comment} />
+                              <textarea className="form-control" rows="5" placeholder={data.placeholders.comment} />
                             </div>
                             <button type="submit" className="theme-btn">
                               <i className="far fa-paper-plane"></i> Enviar Comentario
@@ -347,10 +349,10 @@ const CarTabs = () => {
                           <h5>Debes ingresar para hacer una oferta</h5>
                           <p className="mb-3">Para participar en las subastas necesitas tener una cuenta activa</p>
                           <Link to="/login" className="theme-btn me-2">
-                            <i className="fas fa-sign-in-alt"></i> {detailData.labels.loginButton}
+                            <i className="fas fa-sign-in-alt"></i> {data.labels.loginButton}
                           </Link>
                           <Link to="/register" className="theme-btn theme-btn-outline">
-                            <i className="fas fa-user-plus"></i> {detailData.labels.registerButton}
+                            <i className="fas fa-user-plus"></i> {data.labels.registerButton}
                           </Link>
                         </div>
                       ) : (
@@ -364,17 +366,17 @@ const CarTabs = () => {
                             <div className="row">
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="text" className="form-control" placeholder={detailData.placeholders.yourName} />
+                                  <input type="text" className="form-control" placeholder={data.placeholders.yourName} />
                                 </div>
                               </div>
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="email" className="form-control" placeholder={detailData.placeholders.yourEmail} />
+                                  <input type="email" className="form-control" placeholder={data.placeholders.yourEmail} />
                                 </div>
                               </div>
                               <div className="col-md-12">
                                 <div className="form-group">
-                                  <label>{detailData.labels.bidAmount}</label>
+                                  <label>{data.labels.bidAmount}</label>
                                   <input 
                                     type="number" 
                                     className="form-control" 
@@ -389,11 +391,11 @@ const CarTabs = () => {
                                   <textarea 
                                     className="form-control" 
                                     rows="3" 
-                                    placeholder={detailData.placeholders.comment}
+                                    placeholder={data.placeholders.comment}
                                   />
                                 </div>
                                 <button type="submit" className="theme-btn">
-                                  <i className="fas fa-gavel"></i> {detailData.labels.placeBid}
+                                  <i className="fas fa-gavel"></i> {data.labels.placeBid}
                                 </button>
                               </div>
                             </div>

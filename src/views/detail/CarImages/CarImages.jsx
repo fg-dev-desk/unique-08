@@ -3,10 +3,10 @@ import React from 'react';
 import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { AuctionStatus } from '../../../components/ui/AuctionStatus';
 import { useCarImages } from './useCarImages';
-import detailData from '../detailData.json';
 
 const CarImages = () => {
   const {
+    data,
     car,
     loading,
     error,
@@ -24,20 +24,19 @@ const CarImages = () => {
     handleThumbnailClick
   } = useCarImages();
 
-  if (loading) return <div>{detailData.labels.loading}</div>;
-  if (error) return <div>{error}</div>;
-  if (!car) return null;
+  if (loading || !car) return null;
+  if (error) return null;
 
   return (
     <>
       <div className="col-lg-8">
         <div className="car-single-slider-box position-relative">
           {/* Status badge - esquina superior izquierda */}
-          <AuctionStatus isActive={isAuctionActive()} />
+          <AuctionStatus isActive={isAuctionActive} />
           
           {/* Timer badge - esquina superior derecha */}
-          {getAuctionEndDate() && isAuctionActive() && (
-            <AuctionTimer endDate={getAuctionEndDate()} />
+          {getAuctionEndDate && isAuctionActive && (
+            <AuctionTimer endDate={getAuctionEndDate} />
           )}
           
           <div className="car-single-slider owl-carousel owl-theme" ref={sliderRef}>

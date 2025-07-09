@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "title": "Detalle del Vehículo",
+    "description": "Página de detalle del vehículo con información completa"
+  },
+  "breadcrumb": {
+    "title": "Detalle del Vehículo",
+    "currentPage": "Detalle"
+  },
+  "config": {
+    "showBreadcrumb": true,
+    "containerClass": "car-item-single py-120",
+    "wrapperClass": "car-single-wrapper"
+  }
+}

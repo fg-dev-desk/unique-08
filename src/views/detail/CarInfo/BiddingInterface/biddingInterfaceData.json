@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "title": "Interfaz de Pujas",
+    "description": "Interfaz para realizar pujas en la subasta"
+  },
+  "config": {
+    "minimumIncrement": 1000,
+    "currency": "MXN",
+    "currencySymbol": "$",
+    "showBidHistory": true,
+    "maxBidAmount": 10000000,
+    "bidTimeout": 30000
+  },
+  "ui": {
+    "currentBidLabel": "Puja actual",
+    "minimumBidLabel": "Puja mínima",
+    "bidAmountLabel": "Monto de puja",
+    "bidButtonText": "Realizar puja",
+    "loginRequiredText": "Debes iniciar sesión para pujar",
+    "auctionEndedText": "La subasta ha terminado",
+    "placeBidText": "Hacer puja",
+    "bidPlacedText": "Puja realizada exitosamente"
+  },
+  "validation": {
+    "minBidMessage": "La puja mínima es",
+    "invalidAmountMessage": "Monto inválido",
+    "requiredFieldMessage": "Este campo es requerido",
+    "maxBidMessage": "El monto máximo permitido es",
+    "insufficientFundsMessage": "Fondos insuficientes"
+  }
+}

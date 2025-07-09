@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "title": "Información del Vehículo",
+    "description": "Detalles y especificaciones del vehículo"
+  },
+  "carDetailsFields": [
+    {
+      "field": "modelo",
+      "label": "Modelo",
+      "icon": "car"
+    },
+    {
+      "field": "anio",
+      "label": "Año",
+      "icon": "calendar"
+    },
+    {
+      "field": "kilometraje",
+      "label": "Kilometraje",
+      "icon": "speedometer",
+      "suffix": " km"
+    },
+    {
+      "field": "combustible",
+      "label": "Combustible",
+      "icon": "fuel"
+    },
+    {
+      "field": "transmision",
+      "label": "Transmisión",
+      "icon": "gear"
+    },
+    {
+      "field": "motor",
+      "label": "Motor",
+      "icon": "engine"
+    }
+  ],
+  "carTermsFields": [
+    {
+      "field": "precioReserva",
+      "label": "Precio de Reserva",
+      "format": "currency"
+    },
+    {
+      "field": "incrementoMinimo",
+      "label": "Incremento Mínimo",
+      "format": "currency"
+    },
+    {
+      "field": "comision",
+      "label": "Comisión",
+      "format": "currency"
+    }
+  ],
+  "labels": {
+    "customerReviews": "Reseñas de clientes",
+    "activeAuction": "Subasta activa",
+    "auctionEnded": "Subasta terminada",
+    "currentBid": "Puja actual",
+    "bidNow": "Pujar ahora",
+    "carDetails": "Detalles del vehículo",
+    "auctionTerms": "Términos de la subasta",
+    "loginToParticipate": "Inicia sesión para participar",
+    "loginMessage": "Debes iniciar sesión para realizar pujas",
+    "loginButton": "Iniciar sesión",
+    "registerButton": "Registrarse",
+    "shareAuction": "Compartir subasta"
+  },
+  "socialSharing": {
+    "platforms": [
+      {
+        "name": "Facebook",
+        "icon": "fab fa-facebook-f",
+        "url": "https://facebook.com",
+        "color": "#1877f2"
+      },
+      {
+        "name": "Twitter",
+        "icon": "fab fa-twitter",
+        "url": "https://twitter.com",
+        "color": "#1da1f2"
+      },
+      {
+        "name": "Instagram",
+        "icon": "fab fa-instagram",
+        "url": "https://instagram.com",
+        "color": "#e4405f"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "fab fa-linkedin-in",
+        "url": "https://linkedin.com",
+        "color": "#0077b5"
+      }
+    ]
+  }
+}

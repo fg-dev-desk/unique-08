@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "Información Detallada",
+    "description": "Tabs con información detallada del vehículo"
+  },
+  "tabs": {
+    "description": "Descripción",
+    "additionalInfo": "Información adicional",
+    "bidHistory": "Historial de pujas"
+  },
+  "config": {
+    "defaultTab": "description",
+    "animationDuration": 300
+  },
+  "content": {
+    "descriptionText": "Este vehículo se encuentra en excelente estado y cuenta con todas las características necesarias para satisfacer las necesidades de transporte más exigentes. Ha sido mantenido regularmente y está listo para su nuevo propietario."
+  },
+  "labels": {
+    "loginButton": "Iniciar sesión",
+    "registerButton": "Registrarse",
+    "bidAmount": "Monto de puja",
+    "placeBid": "Realizar puja"
+  },
+  "placeholders": {
+    "yourName": "Tu nombre",
+    "yourEmail": "Tu email",
+    "comment": "Escribe tu comentario aquí..."
+  }
+}

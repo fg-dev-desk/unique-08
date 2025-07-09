@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "Galería de Imágenes",
+    "description": "Galería de imágenes del vehículo"
+  },
+  "config": {
+    "showAuctionTimer": true,
+    "showAuctionStatus": true,
+    "maxZoomLevel": 3,
+    "autoSlideInterval": 5000
+  },
+  "ui": {
+    "modalTitle": "Galería de Imágenes",
+    "noImagesText": "No hay imágenes disponibles",
+    "zoomInText": "Acercar",
+    "zoomOutText": "Alejar",
+    "fullScreenText": "Pantalla completa"
+  }
+}

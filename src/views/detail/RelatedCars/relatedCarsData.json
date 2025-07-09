@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "Vehículos Relacionados",
+    "description": "Otros vehículos que podrían interesarte"
+  },
+  "config": {
+    "itemsPerPage": 4,
+    "showPagination": true,
+    "autoScroll": false,
+    "showSimilarByBrand": true,
+    "showSimilarByCategory": true
+  },
+  "ui": {
+    "sectionTitle": "Vehículos Relacionados",
+    "noResultsText": "No hay vehículos relacionados disponibles",
+    "viewMoreText": "Ver más detalles",
+    "bidNowText": "Pujar ahora",
+    "loadingText": "Cargando vehículos relacionados..."
+  },
+  "labels": {
+    "model": "Modelo",
+    "people": "Personas",
+    "currentBid": "Puja actual",
+    "viewAuction": "Ver Subasta"
+  }
+}

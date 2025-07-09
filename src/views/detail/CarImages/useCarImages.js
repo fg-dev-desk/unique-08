@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDetail } from '../useDetail';
+import { useCarDetail } from '../useCarDetail';
+import carImagesData from './carImagesData.json';
 
 export const useCarImages = () => {
-  const { car, loading, error, isAuctionActive, getAuctionEndDate } = useDetail();
+  const { car, loading, error } = useCarDetail();
   const [tick, setTick] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -125,7 +126,23 @@ export const useCarImages = () => {
     openModal(img, index);
   };
 
+  const isAuctionActive = () => {
+    if (!car) return false;
+    if (car.fechaFin) {
+      const end = new Date(car.fechaFin);
+      return end > new Date();
+    }
+    if (car.activo !== undefined) return car.activo;
+    return false;
+  };
+
+  const getAuctionEndDate = () => {
+    if (!car) return null;
+    return car.fechaFin || car.fechaVencimiento;
+  };
+
   return {
+    data: carImagesData,
     car,
     loading,
     error,
@@ -135,8 +152,8 @@ export const useCarImages = () => {
     currentImageIndex,
     zoomLevel,
     sliderRef,
-    isAuctionActive,
-    getAuctionEndDate,
+    isAuctionActive: isAuctionActive(),
+    getAuctionEndDate: getAuctionEndDate(),
     openModal,
     closeModal,
     navigateImage,
