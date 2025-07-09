@@ -2,7 +2,7 @@ import React from 'react';
 
 export const AuctionStatus = ({ isActive, className = "" }) => {
   const getStatusText = () => {
-    return isActive ? 'Subasta Activa' : 'Subasta Terminada';
+    return isActive ? 'Activa' : 'Inactiva';
   };
 
   const getBadgeClass = () => {
@@ -10,7 +10,7 @@ export const AuctionStatus = ({ isActive, className = "" }) => {
   };
 
   const getIcon = () => {
-    return <i className="far fa-clock me-1"></i>;
+    return <i className={`far ${isActive ? 'fa-play-circle' : 'fa-stop-circle'} me-1`}></i>;
   };
 
   return (

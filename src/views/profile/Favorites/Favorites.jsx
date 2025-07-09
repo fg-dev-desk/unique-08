@@ -33,12 +33,16 @@ const Favorites = () => {
                   </div>
                 </div>
                 <div className="car-content">
-                  <div className="car-top">
-                    <h4><a href="#">{favoritesHelpers.getCarName(car)}</a></h4>
-                    <div className="car-rate">
-                      <i className="fas fa-star"></i>
-                      <span>{car.rating}</span>
-                    </div>
+                  <div className="car-top d-flex align-items-center justify-content-between mb-3">
+                    <h4 className="mb-0">
+                      <a href="#" className="text-decoration-none">
+                        {favoritesHelpers.getCarName(car)}
+                      </a>
+                    </h4>
+                    <span className="car-likes d-flex align-items-center">
+                      <i className="fas fa-heart text-primary me-1"></i> 
+                      {car.likes || '0'}
+                    </span>
                   </div>
                   <ul className="car-list">
                     <li><i className="far fa-car"></i>{favoritesData.labels.model}: {car.model}</li>
@@ -47,13 +51,17 @@ const Favorites = () => {
                     <li><i className="far fa-road"></i>{car.consumption}</li>
                     <li><i className="far fa-steering-wheel"></i>{car.transmission}</li>
                   </ul>
-                  <div className="car-footer">
-                    <span className="car-price">
-                      {favoritesHelpers.formatPrice(car.price)} <sub>/{car.period}</sub>
-                    </span>
-                    <a href="#" className="theme-btn">
-                      {favoritesData.labels.bookNow}<i className="fas fa-arrow-right"></i>
-                    </a>
+                  <div className="car-footer d-flex align-items-center justify-content-between">
+                    <div className="car-price-section">
+                      <span className="car-price">
+                        {favoritesHelpers.formatPrice(car.price)} <sub>/{car.period}</sub>
+                      </span>
+                    </div>
+                    <div className="car-actions">
+                      <a href="#" className="theme-btn btn btn-primary btn-sm">
+                        {favoritesData.labels.bookNow} <i className="fas fa-arrow-right"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

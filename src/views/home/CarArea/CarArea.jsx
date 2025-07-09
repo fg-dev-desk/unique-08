@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { AuctionStatus } from '../../../components/ui/AuctionStatus';
+import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 
 import { useCarArea } from './useCarArea';
 
@@ -84,10 +84,6 @@ export const CarArea = ({ scope = 'main' }) => {
                   {/* Status badge - esquina superior izquierda */}
                   <AuctionStatus isActive={carAreaHelpers.isAuctionActive(car)} />
                   
-                  {/* Timer badge - esquina superior derecha */}
-                  {carAreaHelpers.getAuctionEndDate(car) && carAreaHelpers.isAuctionActive(car) && (
-                    <AuctionTimer endDate={carAreaHelpers.getAuctionEndDate(car)} />
-                  )}
                   
                   <div className="car-img">
                     <img 
@@ -96,9 +92,16 @@ export const CarArea = ({ scope = 'main' }) => {
                     />
                   </div>
                   <div className="car-content">
-                    <div className="car-top">
-                      <h4><a href="#">{carAreaHelpers.getCarName(car)}</a></h4>
-                      <span><i className="fas fa-star"></i> {carAreaData.defaults.rating}</span>
+                    <div className="car-top d-flex align-items-center justify-content-between mb-3">
+                      <h4 className="mb-0">
+                        <a href="#" className="text-decoration-none">
+                          {carAreaHelpers.getCarName(car)}
+                        </a>
+                      </h4>
+                      <span className="car-likes d-flex align-items-center">
+                        <i className="fas fa-heart text-primary me-1"></i> 
+                        {carAreaHelpers.getCarLikes(car) || carAreaData.defaults.likes}
+                      </span>
                     </div>
                     <ul className="car-list">
                       <li><i className="far fa-car"></i>{carAreaData.labels.model}: {carAreaHelpers.getCarModel(car)}</li>
@@ -107,13 +110,37 @@ export const CarArea = ({ scope = 'main' }) => {
                       <li><i className="far fa-road"></i>{carAreaHelpers.getCarEfficiency(car)}</li>
                       <li><i className="far fa-steering-wheel"></i>{carAreaHelpers.getCarTransmission(car)}</li>
                     </ul>
-                    <div className="car-footer">
-                      <span className="car-price">
-                        {carAreaHelpers.formatPrice(car.precio)} 
-                        <sub>{carAreaData.labels.perMonth}</sub>
-                      </span>
-                      <a href="#" className="car-favorite-btn"><i className="far fa-heart"></i></a>
-                      <a href={carAreaHelpers.getCarLink(car)} className="theme-btn">{carAreaData.labels.rentNow}</a>
+                    <div className="car-footer d-flex align-items-center justify-content-between">
+                      <div className="car-price-section">
+                        {carAreaHelpers.formatPrice(car.precio, car) ? (
+                          <span className="car-price">
+                            {carAreaHelpers.formatPrice(car.precio, car)} 
+                            <sub>{carAreaData.labels.perMonth}</sub>
+                          </span>
+                        ) : (
+                          // Si no hay precio, mostrar cuenta regresiva o estado
+                          carAreaHelpers.getAuctionEndDate(car) ? (
+                            carAreaHelpers.isAuctionActive(car) ? (
+                              <AuctionTimer 
+                                endDate={carAreaHelpers.getAuctionEndDate(car)} 
+                                displayMode="inline"
+                              />
+                            ) : (
+                              <span className="text-muted">
+                                <i className="far fa-clock me-1"></i>
+                                Finalizado
+                              </span>
+                            )
+                          ) : (
+                            <span className="text-muted">Sin información</span>
+                          )
+                        )}
+                      </div>
+                      <div className="car-actions d-flex align-items-center gap-2">
+                        <a href={carAreaHelpers.getCarLink(car)} className="theme-btn btn btn-primary btn-sm">
+                          {carAreaData.labels.rentNow}
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -181,14 +181,15 @@ export const SearchResults = ({
 
           {/* Content */}
           <div className={`car-details ${isListView ? 'flex-grow-1' : ''}`}>
-            <div className="car-top">
-              <h4>
+            <div className="car-top d-flex align-items-center justify-content-between mb-3">
+              <h4 className="mb-0">
                 <a href={`/subasta/${car.articuloID}`} className="text-decoration-none">
                   {car.nombre || 'Vehicle'}
                 </a>
               </h4>
-              <span className="rating">
-                <i className="fas fa-star"></i> 5.0
+              <span className="car-likes d-flex align-items-center">
+                <i className="fas fa-heart text-primary me-1"></i> 
+                {car.likes || car.favoritos || '0'}
               </span>
             </div>
 
@@ -211,15 +212,14 @@ export const SearchResults = ({
             )}
 
             {/* Footer */}
-            <div className="car-footer">
-              <span className="car-price">
-                {formatPrice(car.montoSalida || 0)}
-                <sub>/subasta</sub>
-              </span>
-              <div className="car-actions">
-                <button className="btn btn-outline-primary btn-sm me-2" title="Agregar a favoritos">
-                  <i className="far fa-heart"></i>
-                </button>
+            <div className="car-footer d-flex align-items-center justify-content-between">
+              <div className="car-price-section">
+                <span className="car-price">
+                  {formatPrice(car.montoSalida || 0)}
+                  <sub>/subasta</sub>
+                </span>
+              </div>
+              <div className="car-actions d-flex align-items-center gap-2">
                 <a href={`/subasta/${car.articuloID}`} className="btn btn-primary btn-sm">
                   Ver Subasta
                 </a>

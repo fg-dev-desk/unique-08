@@ -24,9 +24,16 @@ const RelatedCars = () => {
                   <img src={relatedCar.image} alt={relatedCar.name} />
                 </div>
                 <div className="car-content">
-                  <div className="car-top">
-                    <h4><Link to="#">{relatedCar.name}</Link></h4>
-                    <span><i className="fas fa-star"></i> {relatedCar.rating}</span>
+                  <div className="car-top d-flex align-items-center justify-content-between mb-3">
+                    <h4 className="mb-0">
+                      <Link to="#" className="text-decoration-none">
+                        {relatedCar.name}
+                      </Link>
+                    </h4>
+                    <span className="car-likes d-flex align-items-center">
+                      <i className="fas fa-heart text-primary me-1"></i> 
+                      {relatedCar.likes || '0'}
+                    </span>
                   </div>
                   <ul className="car-list">
                     <li><i className="far fa-car"></i>{data.labels.model}: {relatedCar.model}</li>
@@ -35,13 +42,18 @@ const RelatedCars = () => {
                     <li><i className="far fa-road"></i>{relatedCar.efficiency}</li>
                     <li><i className="far fa-steering-wheel"></i>{relatedCar.transmission}</li>
                   </ul>
-                  <div className="car-footer">
-                    <span className="car-price">
-                      {formatPrice(relatedCar.price)} 
-                      <sub>{data.labels.currentBid}</sub>
-                    </span>
-                    <Link to="#" className="car-favorite-btn"><i className="far fa-heart"></i></Link>
-                    <Link to="#" className="theme-btn">{data.labels.viewAuction}</Link>
+                  <div className="car-footer d-flex align-items-center justify-content-between">
+                    <div className="car-price-section">
+                      <span className="car-price">
+                        {formatPrice(relatedCar.price)} 
+                        <sub>{data.labels.currentBid}</sub>
+                      </span>
+                    </div>
+                    <div className="car-actions d-flex align-items-center gap-2">
+                      <Link to="#" className="theme-btn btn btn-primary btn-sm">
+                        {data.labels.viewAuction}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

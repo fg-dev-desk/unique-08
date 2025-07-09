@@ -57,16 +57,39 @@ export const useCarArea = (scope = 'main') => {
 
     getAuctionEndDate: (car) => {
       // Support both field names for compatibility
-      return car.fechaFin || car.fechaVencimiento;
+      const endDate = car.fechaFin || car.fechaVencimiento;
+      
+      // Validar si la fecha es válida
+      if (endDate) {
+        try {
+          const dateObj = new Date(endDate);
+          if (!isNaN(dateObj.getTime())) {
+            return endDate; // Retornar la fecha real, sin importar si ya pasó
+          }
+        } catch (error) {
+          console.warn('Invalid date format:', endDate, error);
+        }
+      }
+      
+      // Si no hay fecha válida, retornar null para no mostrar cronómetro
+      return null;
     },
 
     isAuctionActive: (car) => {
-      if (car.fechaFin) {
-        const end = new Date(car.fechaFin);
-        return end > new Date();
+      try {
+        const endDate = carAreaHelpers.getAuctionEndDate(car);
+        if (endDate) {
+          const end = new Date(endDate);
+          if (!isNaN(end.getTime())) {
+            return end > new Date();
+          }
+        }
+        if (car.activo !== undefined) return car.activo;
+        return false;
+      } catch (error) {
+        console.warn('Error checking auction status:', error);
+        return false;
       }
-      if (car.activo !== undefined) return car.activo;
-      return false;
     },
 
     getStatus: (car) => {
@@ -79,8 +102,12 @@ export const useCarArea = (scope = 'main') => {
       return 'Inactivo';
     },
 
-    formatPrice: (price) => {
-      return price ? `$${Number(price).toLocaleString('en-US')}` : carAreaData.defaults.price;
+    formatPrice: (price, car) => {
+      if (price) {
+        return `$${Number(price).toLocaleString('en-US')}`;
+      }
+      // Si no hay precio, mostrar información de subasta
+      return null; // Retornamos null para manejarlo en el JSX
     },
 
     getCarName: (car) => {
@@ -109,6 +136,10 @@ export const useCarArea = (scope = 'main') => {
 
     getCarLink: (car) => {
       return `/subasta/${car.torreID || car.id}`;
+    },
+
+    getCarLikes: (car) => {
+      return car.likes || car.favoritos || '0';
     }
   };
 

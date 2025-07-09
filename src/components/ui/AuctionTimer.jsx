@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const AuctionTimer = ({ endDate, className = "" }) => {
+export const AuctionTimer = ({ endDate, className = "", displayMode = "badge" }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -94,7 +94,7 @@ export const AuctionTimer = ({ endDate, className = "" }) => {
   };
 
   const getBadgeClass = () => {
-    return 'bg-warning text-dark'; // Tono más oscuro con texto oscuro
+    return 'bg-warning text-dark'; // Amarillo con texto oscuro para mejor legibilidad
   };
 
   const getIcon = () => {
@@ -106,6 +106,17 @@ export const AuctionTimer = ({ endDate, className = "" }) => {
     return null;
   }
 
+  // Modo inline (sin badge)
+  if (displayMode === "inline") {
+    return (
+      <span className={`auction-timer-inline ${className}`} style={{ fontSize: '0.85rem' }}>
+        Finaliza en: <i className="far fa-clock me-1"></i>
+        {getDisplayTime()}
+      </span>
+    );
+  }
+
+  // Modo badge (original)
   return (
     <div className={`auction-timer-badge position-absolute ${className}`} 
          style={{
