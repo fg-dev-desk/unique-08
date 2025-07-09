@@ -173,6 +173,86 @@ src/views/
 └── mocks.js
 ```
 
+## Descripción de Views
+
+### 1. **Home** - Página Principal
+- **Ruta**: `/`
+- **Propósito**: Página de inicio con hero section y área de vehículos destacados
+- **Secciones**: 
+  - `HeroSection` - Carousel principal con vehículos destacados
+  - `CarArea` - Grid de vehículos disponibles en subasta
+- **Características**: Punto de entrada principal, búsqueda rápida, vehículos destacados
+
+### 2. **About** - Acerca de Nosotros
+- **Ruta**: `/about`
+- **Propósito**: Información corporativa y servicios de la empresa
+- **Secciones**:
+  - `HeroSection` - Banner principal
+  - `AboutSection` - Historia y misión de la empresa
+  - `ServiceSection` - Servicios ofrecidos
+  - `CounterSection` - Estadísticas y logros
+  - `PartnerSection` - Socios y alianzas
+  - `FaqSection` - Preguntas frecuentes
+- **Características**: Contenido estático, información corporativa
+
+### 3. **Auth** - Autenticación
+- **Ruta**: `/auth`
+- **Propósito**: Sistema de login y registro de usuarios
+- **Secciones**:
+  - `LoginSection` - Formulario de inicio de sesión
+  - `RegisterSection` - Formulario de registro
+- **Características**: Validación de formularios, integración con Redux, autenticación Firebase
+
+### 4. **Contact** - Contacto
+- **Ruta**: `/contact`
+- **Propósito**: Información de contacto y formulario de consultas
+- **Secciones**:
+  - `HeroSection` - Banner de contacto
+  - `ContactHeader` - Información principal
+  - `ContactInfo` - Datos de contacto (teléfono, email, dirección)
+  - `ContactMap` - Mapa de ubicación
+  - `ContactForm` - Formulario de contacto
+- **Características**: Formulario funcional, información de contacto, mapa interactivo
+
+### 5. **Detail** - Detalle de Vehículo
+- **Ruta**: `/detail/:id`
+- **Propósito**: Página individual de cada vehículo en subasta
+- **Arquitectura**: Una sola página con múltiples secciones
+- **Secciones**:
+  - `CarImages` - Galería de imágenes del vehículo
+  - `CarInfo` - Información básica y sistema de pujas
+  - `CarTabs` - Tabs con descripción, info adicional, comentarios, historial de pujas
+  - `BiddingHistory` - Historial completo de ofertas
+  - `RelatedCars` - Vehículos relacionados
+- **Hook Compartido**: `useCarDetail.js` - Maneja datos del vehículo, loading, error
+- **Características**: Sistema de pujas en tiempo real, comentarios, especificaciones técnicas
+
+### 6. **Profile** - Perfil de Usuario
+- **Ruta Base**: `/profile`
+- **Propósito**: Dashboard del usuario con múltiples funcionalidades
+- **Arquitectura**: Múltiples páginas con layout compartido
+- **Páginas**:
+  - `Profile.jsx` - Dashboard principal (`/profile`)
+  - `ProfileSettingsPage.jsx` - Configuración de perfil (`/profile/settings`)
+  - `FavoritesPage.jsx` - Vehículos favoritos (`/profile/favorites`)
+  - `MyListingsPage.jsx` - Mis vehículos publicados (`/profile/listings`)
+  - `BillingInfoPage.jsx` - Información de facturación (`/profile/billing`)
+  - `TransactionsPage.jsx` - Historial de transacciones (`/profile/transactions`)
+- **Layout Compartido**: `ProfileLayout.jsx` y `ProfileSidebar.jsx`
+- **Características**: Navegación por pestañas, gestión de perfil, historial de actividades
+
+### 7. **Sell** - Vender Vehículo
+- **Ruta**: `/sell`
+- **Propósito**: Proceso de publicación de vehículos para subasta
+- **Secciones**:
+  - `HeroSection` - Banner de venta
+  - `SellWizard` - Formulario multi-paso para publicar vehículo
+    - `PersonalInfo` - Información personal del vendedor
+    - `CarInfo` - Especificaciones del vehículo
+    - `PhotosInfo` - Carga de imágenes
+  - `SellConfirmation` - Confirmación de publicación
+- **Características**: Formulario multi-paso, validación, carga de archivos
+
 ## Organización por Features
 
 ### Patrón de Organización
@@ -271,14 +351,6 @@ Cada subsección que requiere datos estáticos incluye:
   - CarInfo
   - PersonalInfo
   - PhotosInfo
-
-### Beneficios de esta Organización
-
-1. **Modularidad**: Cada feature es independiente
-2. **Consistencia**: Patrón uniforme en todas las features
-3. **Mantenibilidad**: Fácil localización de archivos
-4. **Escalabilidad**: Agregar nuevas features sin conflictos
-5. **Separación de responsabilidades**: UI, lógica y datos separados
 
 ---
 

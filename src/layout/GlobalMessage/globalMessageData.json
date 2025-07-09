@@ -1,0 +1,12 @@
+{
+  "loading": {
+    "text": "Cargando...",
+    "spinnerClass": "spinner-border text-primary"
+  },
+  "overlay": {
+    "className": "loading-overlay"
+  },
+  "container": {
+    "className": "global-message"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "company": {
+    "name": "Premium Auto Auctions",
+    "description": "Somos la plataforma líder en subastas de vehículos premium, conectando compradores y vendedores en un ambiente seguro y transparente desde hace más de 10 años.",
+    "logo": {
+      "src": "/assets/img/logo/unique-motors-vertical.png",
+      "alt": "Premium Auto Auctions"
+    }
+  },
+  "contact": {
+    "phone": "+52 55 1234 5678",
+    "address": "Av. Reforma 123, Ciudad de México",
+    "email": "info@premiumauctions.com"
+  },
+  "quickLinks": {
+    "title": "Enlaces Rápidos",
+    "links": [
+      {
+        "label": "Sobre Nosotros",
+        "path": "/about"
+      },
+      {
+        "label": "Subastas Activas",
+        "path": "/cars"
+      },
+      {
+        "label": "Términos de Servicio",
+        "path": "#"
+      },
+      {
+        "label": "Política de Privacidad",
+        "path": "#"
+      },
+      {
+        "label": "Nuestro Equipo",
+        "path": "#"
+      }
+    ]
+  },
+  "helpCenter": {
+    "title": "Centro de Ayuda",
+    "links": [
+      {
+        "label": "Centro de Ayuda",
+        "path": "#"
+      },
+      {
+        "label": "Preguntas Frecuentes",
+        "path": "#"
+      },
+      {
+        "label": "Guías de Subasta",
+        "path": "#"
+      },
+      {
+        "label": "Chat en Vivo",
+        "path": "#"
+      },
+      {
+        "label": "Contáctanos",
+        "path": "/contact"
+      }
+    ]
+  },
+  "newsletter": {
+    "title": "Boletín Informativo",
+    "description": "Suscríbete a nuestro boletín para recibir las últimas subastas y noticias del mundo automotriz",
+    "placeholder": "Tu Email",
+    "buttonText": "Suscribirse"
+  },
+  "social": {
+    "facebook": "#",
+    "twitter": "#",
+    "linkedin": "#",
+    "youtube": "#"
+  },
+  "copyright": {
+    "text": "Todos los Derechos Reservados.",
+    "company": "Premium Auto Auctions"
+  }
+}

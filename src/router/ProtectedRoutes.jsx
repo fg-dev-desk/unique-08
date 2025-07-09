@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { LayoutPage } from "../layout/LayoutPage";
+import { Layout as LayoutPage } from "../layout/Layout/Layout";
 import { startRefreshToken } from "../redux/features/auth/thunks";
 import Home from "../views/home/Home";
 import About from "../views/about/About";

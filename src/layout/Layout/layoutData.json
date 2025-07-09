@@ -1,0 +1,14 @@
+{
+  "preloader": {
+    "className": "preloader",
+    "ripple": {
+      "className": "loader-ripple"
+    }
+  },
+  "app": {
+    "className": "App"
+  },
+  "main": {
+    "className": "main"
+  }
+}

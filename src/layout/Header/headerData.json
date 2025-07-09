@@ -1,0 +1,140 @@
+{
+  "contact": {
+    "email": "info@uniquemotors.mx",
+    "schedule": "Lun - Vie (08AM - 10PM)",
+    "phone": "+52 55 37 89 41 66"
+  },
+  "social": {
+    "facebook": "#",
+    "twitter": "#",
+    "instagram": "#",
+    "linkedin": "#"
+  },
+  "logo": {
+    "src": "/assets/img/logo/unique-motors-vertical.png",
+    "alt": "logo"
+  },
+  "navigation": {
+    "home": {
+      "label": "Inicio",
+      "path": "/"
+    },
+    "sell": {
+      "label": "Vender",
+      "path": "/vender"
+    },
+    "about": {
+      "label": "Nosotros",
+      "path": "/about"
+    },
+    "contact": {
+      "label": "Contacto",
+      "path": "/contact"
+    }
+  },
+  "cta": {
+    "phone": {
+      "label": "¿Necesitas Subastar tu Auto?",
+      "number": "+52 55 37 89 41 66"
+    },
+    "button": {
+      "label": "Ver Subastas",
+      "href": "/#cars"
+    }
+  },
+  "userMenu": {
+    "authenticated": {
+      "profile": {
+        "label": "Mi Perfil",
+        "path": "/profile",
+        "icon": "far fa-user"
+      },
+      "listings": {
+        "label": "Mis Subastas",
+        "path": "/profile/listings",
+        "icon": "far fa-car"
+      },
+      "transactions": {
+        "label": "Transacciones",
+        "path": "/profile/transactions",
+        "icon": "far fa-repeat"
+      },
+      "settings": {
+        "label": "Configuración",
+        "path": "/profile/settings",
+        "icon": "far fa-cog"
+      },
+      "logout": {
+        "label": "Cerrar Sesión",
+        "icon": "far fa-sign-out"
+      }
+    },
+    "guest": {
+      "login": {
+        "label": "Iniciar Sesión",
+        "path": "/login",
+        "icon": "far fa-sign-in"
+      },
+      "register": {
+        "label": "Registro",
+        "path": "/register",
+        "icon": "far fa-user-plus"
+      },
+      "about": {
+        "label": "Acerca de",
+        "path": "/about",
+        "icon": "far fa-info-circle"
+      },
+      "contact": {
+        "label": "Contacto",
+        "path": "/contact",
+        "icon": "far fa-envelope"
+      }
+    },
+    "mobile": {
+      "authenticated": {
+        "profile": {
+          "label": "My Profile",
+          "path": "/profile",
+          "icon": "far fa-user"
+        },
+        "billing": {
+          "label": "Billing Info",
+          "path": "/billing",
+          "icon": "far fa-clipboard-list"
+        },
+        "settings": {
+          "label": "Settings",
+          "path": "/settings",
+          "icon": "far fa-cog"
+        },
+        "logout": {
+          "label": "Cerrar Sesión",
+          "icon": "far fa-sign-out"
+        }
+      },
+      "guest": {
+        "login": {
+          "label": "Iniciar Sesión",
+          "path": "/login",
+          "icon": "far fa-sign-in"
+        },
+        "register": {
+          "label": "Crear Cuenta",
+          "path": "/register",
+          "icon": "far fa-user-plus"
+        },
+        "about": {
+          "label": "Nosotros",
+          "path": "/about",
+          "icon": "far fa-info-circle"
+        },
+        "contact": {
+          "label": "Contacto",
+          "path": "/contact",
+          "icon": "far fa-envelope"
+        }
+      }
+    }
+  }
+}
