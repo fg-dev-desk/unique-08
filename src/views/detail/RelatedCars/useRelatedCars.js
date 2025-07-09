@@ -1,62 +1,90 @@
+import { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { startGetFeaturedCars } from '../../../redux/features/home/thunks';
 import relatedCarsData from './relatedCarsData.json';
 
 export const useRelatedCars = () => {
-  const formatPrice = (price) => {
-    return price ? `$${Number(price).toLocaleString('es-MX')}` : '$0';
-  };
+  const dispatch = useDispatch();
+  const scope = 'related';
+  const carsState = useSelector(state => state.homeReducer.carsByScope?.[scope]);
+  const { featuredCars = [], loading, error } = useMemo(() => carsState || {}, [carsState]);
 
-  // Mock related cars for now - in real app this would come from API
-  const mockRelatedCars = [
-    {
-      id: 1,
-      name: "BMW X5 2020",
-      price: 750000,
-      image: "/assets/img/car/car-1.jpg",
-      model: "BMW X5",
-      capacity: "5",
-      fuel: "Gasolina",
-      efficiency: "12km/l",
-      transmission: "Automática",
-      rating: "4.5"
+  useEffect(() => {
+    dispatch(startGetFeaturedCars(1, 3, '1', scope));
+  }, [dispatch, scope]);
+
+  // Usar los mismos helpers que CarArea
+  const relatedCarsHelpers = {
+    getCarImage: (car) => {
+      if (car.urlImgPrincipal) return car.urlImgPrincipal;
+      return "/assets/img/car/car-1.jpg";
     },
-    {
-      id: 2,
-      name: "Mercedes GLE 2019",
-      price: 680000,
-      image: "/assets/img/car/car-2.jpg",
-      model: "Mercedes GLE",
-      capacity: "5",
-      fuel: "Gasolina",
-      efficiency: "11km/l",
-      transmission: "Automática",
-      rating: "4.3"
+
+    getCarName: (car) => {
+      return car.nombre || car.name || 'Vehicle';
     },
-    {
-      id: 3,
-      name: "Audi Q7 2021",
-      price: 820000,
-      image: "/assets/img/car/car-3.jpg",
-      model: "Audi Q7",
-      capacity: "7",
-      fuel: "Gasolina",
-      efficiency: "10km/l",
-      transmission: "Automática",
-      rating: "4.7"
+
+    getCarModel: (car) => {
+      return car.modelo || car.modeloAnio || 'N/A';
+    },
+
+    getCarCapacity: (car) => {
+      return car.capacidad || '5';
+    },
+
+    getCarFuel: (car) => {
+      return car.tipoCombustible || 'Gasolina';
+    },
+
+    getCarEfficiency: (car) => {
+      return car.rendimiento || '12km/l';
+    },
+
+    getCarTransmission: (car) => {
+      return car.transmision || 'Automática';
+    },
+
+    getCarLink: (car) => {
+      return `/subasta/${car.torreID || car.id}`;
+    },
+
+    getCarLikes: (car) => {
+      return car.likes || car.favoritos || '0';
+    },
+
+    formatPrice: (price) => {
+      if (price) {
+        return `$${Number(price).toLocaleString('en-US')}`;
+      }
+      return '$0';
+    },
+
+    getAuctionEndDate: (car) => {
+      const endDate = car.fechaFin || car.fechaVencimiento;
+      
+      if (endDate) {
+        try {
+          const dateObj = new Date(endDate);
+          if (!isNaN(dateObj.getTime())) {
+            return endDate;
+          }
+        } catch (error) {
+          console.warn('Invalid date format:', endDate, error);
+        }
+      }
+      
+      return null;
     }
-  ];
-
-  // Only show first 3 related cars
-  const relatedCarsToShow = mockRelatedCars.slice(0, 3);
-
-  // Generate a future date for timer simulation (2 days from now)
-  const getFutureDate = () => {
-    return new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
   };
 
   return {
     data: relatedCarsData,
-    relatedCarsToShow,
-    formatPrice,
-    getFutureDate
+    relatedCarsToShow: featuredCars.slice(0, 3),
+    relatedCarsHelpers,
+    loading,
+    error,
+    formatPrice: relatedCarsHelpers.formatPrice,
+    getFutureDate: relatedCarsHelpers.getAuctionEndDate
   };
 };
