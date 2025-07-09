@@ -41,16 +41,10 @@ export const AppRouter = () => {
 
   if (logged === consLogged.STARTING) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        flexDirection: 'column'
-      }}>
-        <div>Cargando aplicación...</div>
-        <div style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>
-          Estado: {logged}
+      <div className="preloader">
+        <div className="loader-ripple">
+          <div></div>
+          <div></div>
         </div>
       </div>
     );

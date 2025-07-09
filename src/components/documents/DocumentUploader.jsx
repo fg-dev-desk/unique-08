@@ -213,8 +213,9 @@ export const DocumentUploader = ({
         <div className="upload-content">
           {uploading ? (
             <>
-              <div className="spinner-border text-primary mb-3" role="status">
-                <span className="visually-hidden">Subiendo...</span>
+              <div className="loader-ripple mb-3">
+                <div></div>
+                <div></div>
               </div>
               <h6>Subiendo documento...</h6>
               <p className="text-muted mb-0">Por favor espera</p>

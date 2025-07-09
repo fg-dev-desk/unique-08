@@ -159,8 +159,9 @@ export const SearchFilters = ({
       <div className="filters-body p-3">
         {loading ? (
           <div className="text-center py-4">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Cargando filtros...</span>
+            <div className="loader-ripple">
+              <div></div>
+              <div></div>
             </div>
           </div>
         ) : (

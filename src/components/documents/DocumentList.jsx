@@ -166,8 +166,9 @@ export const DocumentList = ({
     return (
       <div className={`document-list ${className}`}>
         <div className="text-center py-4">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Cargando documentos...</span>
+          <div className="loader-ripple">
+            <div></div>
+            <div></div>
           </div>
           <p className="mt-2">Cargando documentos...</p>
         </div>
@@ -311,7 +312,10 @@ export const DocumentList = ({
                     {deleting === documentId && (
                       <div className="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center rounded">
                         <div className="text-white text-center">
-                          <div className="spinner-border spinner-border-sm mb-2" role="status"></div>
+                          <div className="loader-ripple mb-2" style={{ transform: 'scale(0.5)' }}>
+                            <div></div>
+                            <div></div>
+                          </div>
                           <div>Eliminando...</div>
                         </div>
                       </div>

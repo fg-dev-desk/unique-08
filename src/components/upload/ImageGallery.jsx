@@ -120,8 +120,9 @@ export const ImageGallery = ({
     return (
       <div className={`image-gallery ${className}`}>
         <div className="text-center py-4">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Cargando imágenes...</span>
+          <div className="loader-ripple">
+            <div></div>
+            <div></div>
           </div>
           <p className="mt-2">Cargando galería...</p>
         </div>
@@ -281,7 +282,10 @@ export const ImageGallery = ({
                 {/* Loading overlay for deleting */}
                 {deleting === image.articuloDocumentoID && (
                   <div className="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center">
-                    <div className="spinner-border spinner-border-sm text-light" role="status"></div>
+                    <div className="loader-ripple" style={{ transform: 'scale(0.5)' }}>
+                      <div></div>
+                      <div></div>
+                    </div>
                   </div>
                 )}
               </div>

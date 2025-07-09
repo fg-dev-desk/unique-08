@@ -148,8 +148,9 @@ export const DynamicForm = ({
   if (loading) {
     return (
       <div className="text-center py-4">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Cargando campos...</span>
+        <div className="loader-ripple">
+          <div></div>
+          <div></div>
         </div>
         <p className="mt-2">Cargando formulario...</p>
       </div>

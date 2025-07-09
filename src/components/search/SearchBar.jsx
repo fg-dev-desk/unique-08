@@ -327,7 +327,10 @@ export const SearchBar = ({
             title="Buscar"
           >
             {loading ? (
-              <i className="fas fa-spinner fa-spin"></i>
+              <div className="loader-ripple" style={{ transform: 'scale(0.3)' }}>
+                <div></div>
+                <div></div>
+              </div>
             ) : (
               <i className="fas fa-search"></i>
             )}

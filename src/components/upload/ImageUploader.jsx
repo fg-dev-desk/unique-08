@@ -335,7 +335,10 @@ export const ImageUploader = ({
           >
             {uploading ? (
               <>
-                <i className="fas fa-spinner fa-spin me-2"></i>
+                <div className="loader-ripple me-2" style={{ transform: 'scale(0.3)' }}>
+                  <div></div>
+                  <div></div>
+                </div>
                 Subiendo...
               </>
             ) : (

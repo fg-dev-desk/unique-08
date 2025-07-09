@@ -193,7 +193,10 @@ const BiddingInterface = ({ car, isActive }) => {
               disabled={isLoading || !customBid}
             >
               {isLoading ? (
-                <span className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                <div className="loader-ripple me-1" style={{ transform: 'scale(0.3)' }}>
+                  <div></div>
+                  <div></div>
+                </div>
               ) : (
                 <i className="fas fa-gavel me-1"></i>
               )}

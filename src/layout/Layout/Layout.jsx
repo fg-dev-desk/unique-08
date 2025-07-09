@@ -9,13 +9,6 @@ export const Layout = ({ children }) => {
 
   return (
     <div className={data.app.className}>
-      <div className={data.preloader.className}>
-        <div className={data.preloader.ripple.className}>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-
       <Header />
       <main className={data.main.className}>
         {children}
