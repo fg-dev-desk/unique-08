@@ -14,7 +14,7 @@
   ],
   "labels": {
     "model": "Modelo",
-    "people": "Personas",
+    "people": "plazas",
     "perMonth": "",
     "loadMore": "Cargar Más",
     "rentNow": "Ver Más"
@@ -26,9 +26,9 @@
   "defaults": {
     "image": "/assets/img/car/01.jpg",
     "capacity": "4",
-    "fuel": "Híbrido",
-    "efficiency": "10.15km / 1-litro",
-    "transmission": "Automático",
+    "fuel": "Gasolina",
+    "efficiency": "Sin datos",
+    "transmission": "Manual",
     "price": "Finaliza en: ",
     "likes": "12"
   }

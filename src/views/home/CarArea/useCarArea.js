@@ -122,39 +122,103 @@ export const useCarArea = (scope = 'main') => {
     },
 
     getCarModel: (car) => {
-      // Get model info from valores array
-      const anoValor = car.valores?.find(v => v.campo === 'Año');
-      const submarcaValor = car.valores?.find(v => v.campo === 'Submarca');
+      // Extract model from car name or use nome directly
+      // Ex: "Lamborghini Urus 4.0" -> show just the main part
+      const carName = car.articulo?.nombre || car.nombre || 'Vehículo';
       
-      if (anoValor && submarcaValor) {
-        return `${anoValor.valor} ${submarcaValor.valor}`;
+      // For listing view, show a simplified version of the name
+      if (carName.length > 20) {
+        return carName.split(' ').slice(0, 2).join(' '); // First 2 words
       }
       
-      return car.modelo || car.modeloAnio || anoValor?.valor || 'N/A';
+      return carName;
     },
 
     getCarCapacity: (car) => {
-      // Try to get capacity from valores array or fallback
-      const capacidadValor = car.valores?.find(v => v.campo === 'Capacidad' || v.campo === 'Asientos');
-      return capacidadValor?.valor || car.capacidad || carAreaData.defaults.capacity;
+      // Extract from description text since valores is null in listing
+      const descripcion = car.articulo?.descripcion || car.descripcion || '';
+      
+      // Look for passenger/seat indicators in description
+      const seatMatch = descripcion.match(/(\d+)\s*(plazas|asientos|pasajeros)/i);
+      if (seatMatch) {
+        return seatMatch[1];
+      }
+      
+      // Default estimates based on car type/name
+      const carName = (car.articulo?.nombre || car.nombre || '').toLowerCase();
+      if (carName.includes('lamborghini') || carName.includes('ferrari') || carName.includes('porsche')) {
+        return '2'; // Sports cars usually 2 seats
+      }
+      if (carName.includes('suv') || carName.includes('urus') || carName.includes('levante')) {
+        return '5'; // SUVs usually 5 seats
+      }
+      
+      return '4'; // Default
     },
 
     getCarFuel: (car) => {
-      // Get fuel type from valores array
-      const combustibleValor = car.valores?.find(v => v.campo === 'Combustible');
-      return combustibleValor?.valor || car.tipoCombustible || carAreaData.defaults.fuel;
+      // Extract fuel type from description
+      const descripcion = car.articulo?.descripcion || car.descripcion || '';
+      
+      // Look for fuel type indicators
+      if (descripcion.toLowerCase().includes('eléctrico') || descripcion.toLowerCase().includes('tesla')) {
+        return 'Eléctrico';
+      }
+      if (descripcion.toLowerCase().includes('híbrido')) {
+        return 'Híbrido';
+      }
+      if (descripcion.toLowerCase().includes('diesel') || descripcion.toLowerCase().includes('diésel')) {
+        return 'Diésel';
+      }
+      if (descripcion.toLowerCase().includes('gasolina') || descripcion.toLowerCase().includes('motor v')) {
+        return 'Gasolina';
+      }
+      
+      // Default for luxury cars
+      return 'Gasolina';
     },
 
     getCarEfficiency: (car) => {
-      // Try to get efficiency from valores array
-      const rendimientoValor = car.valores?.find(v => v.campo === 'Rendimiento' || v.campo === 'Eficiencia');
-      return rendimientoValor?.valor || car.rendimiento || carAreaData.defaults.efficiency;
+      // Extract kilometers from description
+      const descripcion = car.articulo?.descripcion || car.descripcion || '';
+      
+      // Look for km patterns like "9,000 km", "9000 km", "Solo 9,000 km"
+      const kmMatch = descripcion.match(/(\d{1,3}(?:,\d{3})*)\s*km/i);
+      if (kmMatch) {
+        const km = kmMatch[1].replace(/,/g, '');
+        return `${parseInt(km).toLocaleString()} km`;
+      }
+      
+      // Look for other patterns
+      const kmMatch2 = descripcion.match(/kilometraje[:\s]*(\d{1,3}(?:,\d{3})*)/i);
+      if (kmMatch2) {
+        const km = kmMatch2[1].replace(/,/g, '');
+        return `${parseInt(km).toLocaleString()} km`;
+      }
+      
+      return 'Sin datos';
     },
 
     getCarTransmission: (car) => {
-      // Get transmission from valores array
-      const transmisionValor = car.valores?.find(v => v.campo === 'Transmision' || v.campo === 'Transmisión');
-      return transmisionValor?.valor || car.transmision || carAreaData.defaults.transmission;
+      // Extract transmission from description
+      const descripcion = car.articulo?.descripcion || car.descripcion || '';
+      
+      // Look for transmission indicators
+      if (descripcion.toLowerCase().includes('automático') || 
+          descripcion.toLowerCase().includes('automatica') ||
+          descripcion.toLowerCase().includes('pdk') ||
+          descripcion.toLowerCase().includes('at ')) {
+        return 'Automático';
+      }
+      if (descripcion.toLowerCase().includes('manual') || descripcion.toLowerCase().includes('mt ')) {
+        return 'Manual';
+      }
+      if (descripcion.toLowerCase().includes('cvt')) {
+        return 'CVT';
+      }
+      
+      // Default for luxury cars is usually automatic
+      return 'Automático';
     },
 
     getCarLink: (car) => {
