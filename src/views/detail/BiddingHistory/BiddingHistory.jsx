@@ -16,10 +16,38 @@ const BiddingHistory = ({ carPrice, isActive = true }) => {
     getBidTypeIcon,
     getBidTypeLabel,
     handleInputChange,
-    getColumnSpecs
+    getColumnSpecs,
+    loading,
+    error
   } = useBiddingHistory(carPrice, isActive);
 
   const { labels, content } = biddingHistoryData;
+
+  if (loading) {
+    return (
+      <div className="car-single-review">
+        <div className="blog-comments">
+          <div className="d-flex justify-content-center py-5">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Cargando historial de pujas...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="car-single-review">
+        <div className="blog-comments">
+          <div className="alert alert-warning" role="alert">
+            <i className="fas fa-exclamation-triangle"></i> {error}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="car-single-review">
@@ -64,37 +92,44 @@ const BiddingHistory = ({ carPrice, isActive = true }) => {
         </div>
 
         <div className="blog-comments-wrapper">
-          {biddingHistory.map((bid) => (
-            <div key={bid.id} className="blog-comments-single">
-              <div className="bid-avatar-container">
-                <i className={`${getBidTypeIcon(bid.bidType)} fs-3 text-primary`}></i>
-                {bid.isWinning && (
-                  <span className="winning-bid-badge position-absolute top-0 start-100 translate-middle">
-                    {labels.winning}
-                  </span>
-                )}
-              </div>
-              <div className="blog-comments-content">
-                <h5>
-                  {bid.bidderName}
-                  <span className={`bid-type-label ms-2 ${
-                    bid.bidType === 'automatic' ? 'automatic-bid' : 'manual-bid'
-                  }`}>
-                    {getBidTypeLabel(bid.bidType)}
-                  </span>
-                </h5>
-                <span><i className="far fa-clock"></i> {formatTime(bid.bidTime)}</span>
-                <p>
-                  <strong>Monto de la puja: {formatCurrency(bid.bidAmount)}</strong>
+          {biddingHistory.length === 0 ? (
+            <div className="text-center py-4">
+              <i className="fas fa-gavel fs-1 text-muted mb-3"></i>
+              <p className="text-muted">No hay pujas registradas aún. ¡Sé el primero en pujar!</p>
+            </div>
+          ) : (
+            biddingHistory.map((bid) => (
+              <div key={bid.id} className="blog-comments-single">
+                <div className="bid-avatar-container">
+                  <i className={`${getBidTypeIcon(bid.bidType)} fs-3 text-primary`}></i>
                   {bid.isWinning && (
-                    <span className="text-warning ms-2">
-                      <i className="fas fa-trophy"></i> {labels.currentWinningBid}
+                    <span className="winning-bid-badge position-absolute top-0 start-100 translate-middle">
+                      {labels.winning}
                     </span>
                   )}
-                </p>
+                </div>
+                <div className="blog-comments-content">
+                  <h5>
+                    {bid.bidderName}
+                    <span className={`bid-type-label ms-2 ${
+                      bid.bidType === 'automatic' ? 'automatic-bid' : 'manual-bid'
+                    }`}>
+                      {getBidTypeLabel(bid.bidType)}
+                    </span>
+                  </h5>
+                  <span><i className="far fa-clock"></i> {formatTime(bid.bidTime)}</span>
+                  <p>
+                    <strong>Monto de la puja: {formatCurrency(bid.bidAmount)}</strong>
+                    {bid.isWinning && (
+                      <span className="text-warning ms-2">
+                        <i className="fas fa-trophy"></i> {labels.currentWinningBid}
+                      </span>
+                    )}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         {isActive && (

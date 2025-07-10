@@ -13,7 +13,19 @@ export const startGetFeaturedCars = (page = 1, pageSize = 6, sortBy = '1', scope
         response = await fetch("get", endpoint);
       } catch {}
       if (response && response.ok && response.data && Array.isArray(response.data.torres)) {
-        dispatch(setFeaturedCars({ scope, cars: response.data.torres }));
+        // Transform API data to include valores for easier access
+        const transformedCars = response.data.torres.map(torre => ({
+          ...torre,
+          // Keep original structure but ensure valores is available
+          valores: torre.valores || [],
+          // Add direct access properties for backward compatibility
+          urlImgPrincipal: torre.urlImgPrincipal,
+          nombre: torre.nombre,
+          descripcion: torre.descripcion,
+          montoSalida: torre.montoSalida,
+          fechaFin: torre.fechaFin
+        }));
+        dispatch(setFeaturedCars({ scope, cars: transformedCars }));
       } else {
         dispatch(setFeaturedCars({ scope, cars: [] }));
       }
@@ -40,7 +52,19 @@ export const startSearchCars = (searchQuery, page = 1, pageSize = 6, sortBy = '1
         response = await fetch("get", endpoint);
       } catch {}
       if (response && response.ok && response.data && Array.isArray(response.data.torres)) {
-        dispatch(setFeaturedCars({ scope, cars: response.data.torres }));
+        // Transform API data to include valores for easier access
+        const transformedCars = response.data.torres.map(torre => ({
+          ...torre,
+          // Keep original structure but ensure valores is available
+          valores: torre.valores || [],
+          // Add direct access properties for backward compatibility
+          urlImgPrincipal: torre.urlImgPrincipal,
+          nombre: torre.nombre,
+          descripcion: torre.descripcion,
+          montoSalida: torre.montoSalida,
+          fechaFin: torre.fechaFin
+        }));
+        dispatch(setFeaturedCars({ scope, cars: transformedCars }));
       } else {
         dispatch(setFeaturedCars({ scope, cars: [] }));
       }

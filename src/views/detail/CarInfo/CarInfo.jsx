@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import BiddingInterface from './BiddingInterface/BiddingInterface';
 import { useCarInfo } from './useCarInfo';
+import { useBiddingHistory } from '../BiddingHistory/useBiddingHistory';
 const CarInfo = () => {
   const {
     data,
@@ -13,10 +14,12 @@ const CarInfo = () => {
     formatPrice,
     timeLeft,
     isActive,
-    carDetails,
     carTerms,
     isAuctionActive
   } = useCarInfo();
+
+  // Get real bidding data for current bid display
+  const { auctionDetails, loading: biddingLoading } = useBiddingHistory(car?.montoSalida || car?.precio || 0, isActive);
 
   if (loading || !car) return null;
   if (error) return null;
@@ -58,7 +61,7 @@ const CarInfo = () => {
           <div className="car-single-price-section mb-4">
             <div className="current-price text-center">
               <div className="car-price fs-3 fw-bold text-primary mb-1">
-                {formatPrice(car.precio)}
+                {biddingLoading ? formatPrice(car.montoSalida || car.precio || 0) : formatPrice(auctionDetails.currentBid || car.montoSalida || car.precio || 0)}
               </div>
               <div className="price-label text-muted small">{data.labels.currentBid}</div>
               {isActive && (
@@ -75,23 +78,6 @@ const CarInfo = () => {
 
         {/* Main Content - Flexible height */}
         <div className="car-single-content flex-grow-1 d-flex flex-column">
-          {/* Car Details */}
-          {carDetails.length > 0 && (
-            <div className="car-single-details mb-4">
-              <h5 className="section-title mb-3">{data.labels.carDetails}</h5>
-              <div className="details-list">
-                {carDetails.map((detail, index) => (
-                  <div key={index} className="detail-item d-flex align-items-center mb-3">
-                    <i className={`${detail.icon} me-3 text-primary`}></i>
-                    <div className="flex-grow-1">
-                      <div className="detail-label text-muted small">{detail.label}</div>
-                      <div className="detail-value fw-semibold">{detail.value}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
           
           {/* Car Terms */}
           {carTerms.length > 0 && (

@@ -21,7 +21,8 @@ export const useCarArea = (scope = 'main') => {
 
   // effects
   useEffect(() => {
-    dispatch(startGetFeaturedCars(1, 6, '1', scope));
+    // Always fetch from the main auction data
+    dispatch(startGetFeaturedCars(1, 12, '1', scope));
   }, [dispatch, scope]);
 
   useEffect(() => {
@@ -32,7 +33,13 @@ export const useCarArea = (scope = 'main') => {
   // helpers
   const carAreaHelpers = {
     getCarImage: (car) => {
-      if (car.urlImgPrincipal) return car.urlImgPrincipal;
+      if (car.urlImgPrincipal) {
+        // Handle both full URLs and relative paths
+        if (car.urlImgPrincipal.startsWith('http')) {
+          return car.urlImgPrincipal;
+        }
+        return `https://subasta30.blob.core.windows.net/articulos/${car.urlImgPrincipal}`;
+      }
       return carAreaData.defaults.image;
     },
 
@@ -115,31 +122,71 @@ export const useCarArea = (scope = 'main') => {
     },
 
     getCarModel: (car) => {
-      return car.modelo || car.modeloAnio || 'N/A';
+      // Get model info from valores array
+      const anoValor = car.valores?.find(v => v.campo === 'Año');
+      const submarcaValor = car.valores?.find(v => v.campo === 'Submarca');
+      
+      if (anoValor && submarcaValor) {
+        return `${anoValor.valor} ${submarcaValor.valor}`;
+      }
+      
+      return car.modelo || car.modeloAnio || anoValor?.valor || 'N/A';
     },
 
     getCarCapacity: (car) => {
-      return car.capacidad || carAreaData.defaults.capacity;
+      // Try to get capacity from valores array or fallback
+      const capacidadValor = car.valores?.find(v => v.campo === 'Capacidad' || v.campo === 'Asientos');
+      return capacidadValor?.valor || car.capacidad || carAreaData.defaults.capacity;
     },
 
     getCarFuel: (car) => {
-      return car.tipoCombustible || carAreaData.defaults.fuel;
+      // Get fuel type from valores array
+      const combustibleValor = car.valores?.find(v => v.campo === 'Combustible');
+      return combustibleValor?.valor || car.tipoCombustible || carAreaData.defaults.fuel;
     },
 
     getCarEfficiency: (car) => {
-      return car.rendimiento || carAreaData.defaults.efficiency;
+      // Try to get efficiency from valores array
+      const rendimientoValor = car.valores?.find(v => v.campo === 'Rendimiento' || v.campo === 'Eficiencia');
+      return rendimientoValor?.valor || car.rendimiento || carAreaData.defaults.efficiency;
     },
 
     getCarTransmission: (car) => {
-      return car.transmision || carAreaData.defaults.transmission;
+      // Get transmission from valores array
+      const transmisionValor = car.valores?.find(v => v.campo === 'Transmision' || v.campo === 'Transmisión');
+      return transmisionValor?.valor || car.transmision || carAreaData.defaults.transmission;
     },
 
     getCarLink: (car) => {
-      return `/subasta/${car.torreID || car.id}`;
+      // Handle both torre structure and direct car structure
+      const id = car.torreID || car.id || car.articuloID;
+      return `/subasta/${id}`;
     },
 
     getCarLikes: (car) => {
       return car.likes || car.favoritos || '0';
+    },
+
+    // New helper to get car year specifically
+    getCarYear: (car) => {
+      const anoValor = car.valores?.find(v => v.campo === 'Año');
+      return anoValor?.valor || car.anio || car.año || '';
+    },
+
+    // New helper to get car brand
+    getCarBrand: (car) => {
+      const marcaValor = car.valores?.find(v => v.campo === 'Marca');
+      return marcaValor?.valor || car.marca || '';
+    },
+
+    // New helper to get car kilometers  
+    getCarKilometers: (car) => {
+      const kmValor = car.valores?.find(v => v.campo === 'Km' || v.campo === 'Kilometraje');
+      if (kmValor?.valor) {
+        const km = kmValor.valor.replace(/[^0-9]/g, ''); // Remove non-numeric chars
+        return `${parseInt(km).toLocaleString()} km`;
+      }
+      return car.kilometraje || '';
     }
   };
 

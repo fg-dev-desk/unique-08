@@ -8,7 +8,7 @@ export const useCarTabs = () => {
   const { car, loading, error } = useCarDetail();
   const { logged } = useSelector(state => state.userReducer);
   const isAuthenticated = logged === consLogged.LOGGED;
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState('bidHistory');
 
   if (!car) return { car: null, activeTab, setActiveTab };
 
@@ -39,21 +39,7 @@ export const useCarTabs = () => {
   const timeLeft = getTimeLeft(car.fechaFin);
   const isActive = timeLeft !== 'Subasta terminada';
 
-  // Helper to group specifications by category from car.valores
-  const detallesVehiculoCampos = [
-    'Marca', 'Version', 'Submarca', 'Modelo', 'Origen', 'Carrocería', 'Edición Especial', 
-    'Pais de Origen', 'Combustible', 'Transmision', 'Km', 'No Dueños', 'Motor', 'Color', 
-    'Potencia', 'Torque', 'Cilindrada', 'Velocidad Máxima', 'Aceleración', 'Tipo de Tracción', 
-    'Suspensión', 'Frenos'
-  ];
-
-  const detallesVehiculo = car.valores ? car.valores.filter(spec => 
-    detallesVehiculoCampos.includes(spec.campo)
-  ) : [];
-
-  const infoAdicional = car.valores ? car.valores.filter(spec => 
-    !detallesVehiculoCampos.includes(spec.campo)
-  ) : [];
+  // No need to filter specifications since we show all in description tab
 
   // Split specifications into two columns
   const getColumnSpecs = (specs, column) => {
@@ -77,8 +63,6 @@ export const useCarTabs = () => {
     formatPrice,
     timeLeft,
     isActive,
-    detallesVehiculo,
-    infoAdicional,
     getColumnSpecs,
     calculateMinimumBid
   };

@@ -44,34 +44,37 @@ export const useCarInfo = () => {
     return false;
   };
 
-  const getCarDetails = (carDetailsFields) => {
-    if (!car) return [];
-    const details = [];
-    
-    carDetailsFields.forEach(field => {
-      if (car[field.field]) {
-        const value = field.suffix ? `${car[field.field]}${field.suffix}` : car[field.field];
-        details.push({
-          icon: field.icon,
-          label: field.label,
-          value: value
-        });
-      }
-    });
-    
-    return details;
-  };
 
   const getCarTerms = (carTermsFields) => {
     if (!car) return [];
     const terms = [];
     
     carTermsFields.forEach(field => {
-      if (car[field.field]) {
-        const value = field.format === 'currency' ? formatPrice(car[field.field]) : car[field.field];
+      let value = null;
+      
+      // Handle specific auction terms
+      switch (field.field) {
+        case 'precioReserva':
+          // Calculate reserve price as 110% of starting bid if not available
+          value = car.precioReserva || (car.montoSalida ? car.montoSalida * 1.1 : null);
+          break;
+        case 'incrementoMinimo':
+          // Default increment is 10,000 MXN
+          value = car.incrementoMinimo || 10000;
+          break;
+        case 'comision':
+          // Default commission
+          value = car.comision || (car.montoSalida ? car.montoSalida * 0.05 : null);
+          break;
+        default:
+          value = car[field.field];
+      }
+      
+      if (value) {
+        const formattedValue = field.format === 'currency' ? formatPrice(value) : value;
         terms.push({
           label: field.label,
-          value: value
+          value: formattedValue
         });
       }
     });
@@ -81,7 +84,6 @@ export const useCarInfo = () => {
 
   const timeLeft = getTimeLeft(car.fechaFin);
   const isActive = timeLeft !== 'Subasta terminada';
-  const carDetails = getCarDetails(carInfoData.carDetailsFields);
   const carTerms = getCarTerms(carInfoData.carTermsFields);
 
   return {
@@ -93,7 +95,6 @@ export const useCarInfo = () => {
     formatPrice,
     timeLeft,
     isActive,
-    carDetails,
     carTerms,
     isAuctionActive: isAuctionActive()
   };

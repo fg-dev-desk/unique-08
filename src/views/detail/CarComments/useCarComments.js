@@ -1,8 +1,19 @@
 import { useState } from 'react';
-import { mockComments } from '../../../mocks';
+
+// Mock comments for now - TODO: integrate with API when comments endpoint is available
+const initialComments = [
+  {
+    id: 1,
+    userName: "María González",
+    userImage: "assets/img/blog/com-1.jpg",
+    date: "15 Marzo, 2024",
+    rating: 5,
+    comment: "Excelente vehículo, muy bien cuidado. El proceso de puja fue muy transparente."
+  }
+];
 
 export const useCarComments = () => {
-  const [comments, setComments] = useState(mockComments);
+  const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState({
     userName: '',
     userEmail: '',
