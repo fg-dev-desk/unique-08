@@ -15,7 +15,7 @@
   "labels": {
     "model": "Modelo",
     "people": "plazas",
-    "perMonth": "",
+    "perMonth": "Precio base",
     "loadMore": "Cargar Más",
     "rentNow": "Ver Más"
   },
@@ -29,7 +29,7 @@
     "fuel": "Gasolina",
     "efficiency": "Sin datos",
     "transmission": "Manual",
-    "price": "Finaliza en: ",
+    "price": "Finaliza en:",
     "likes": "12"
   }
 }

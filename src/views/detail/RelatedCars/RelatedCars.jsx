@@ -5,7 +5,7 @@ import { AuctionTimer } from '../../../components/ui/AuctionTimer';
 import { useRelatedCars } from './useRelatedCars';
 
 const RelatedCars = () => {
-  const { data, relatedCarsToShow, relatedCarsHelpers, loading, error } = useRelatedCars();
+  const { data, featuredCars, relatedCarsHelpers, loading, error } = useRelatedCars();
 
   if (loading) {
     return (
@@ -35,6 +35,19 @@ const RelatedCars = () => {
     );
   }
 
+  if (!featuredCars || featuredCars.length === 0) {
+    return (
+      <div className="container">
+        <div className="car-related-item pt-80">
+          <div className="text-center py-5">
+            <i className="fas fa-car fs-1 text-muted mb-3"></i>
+            <p className="text-muted">No hay vehículos relacionados disponibles</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <div className="car-related-item pt-80">
@@ -43,7 +56,7 @@ const RelatedCars = () => {
           <Link to="/">{data.ui.viewMoreText} <i className="far fa-arrow-right"></i></Link>
         </div>
         <div className="row align-items-center">
-          {relatedCarsToShow.map((relatedCar, index) => (
+          {(featuredCars || []).map((relatedCar, index) => (
             <div key={relatedCar.torreID || relatedCar.id || index} className="col-lg-6 col-xl-4">
               <div className="car-item position-relative">
                 {/* Timer badge - usando datos reales */}
@@ -74,7 +87,7 @@ const RelatedCars = () => {
                   <div className="car-footer d-flex align-items-center justify-content-between">
                     <div className="car-price-section">
                       <span className="car-price">
-                        {relatedCarsHelpers.formatPrice(relatedCar.precio || relatedCar.price)} 
+                        {relatedCarsHelpers.formatPrice(relatedCar.precio || relatedCar.price, relatedCar)} 
                         <sub>{data.labels.currentBid}</sub>
                       </span>
                     </div>

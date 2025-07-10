@@ -110,9 +110,18 @@ export const useCarArea = (scope = 'main') => {
     },
 
     formatPrice: (price, car) => {
-      if (price) {
-        return `$${Number(price).toLocaleString('en-US')}`;
+      // For now, show starting bid until we implement current bid fetching
+      // TODO: In future, fetch current bid from /AdminPujas/GetPujasTorre/{torreID}
+      const startingPrice = car.articulo?.montoSalida || car.montoSalida || price || 0;
+      
+      if (startingPrice && startingPrice > 0) {
+        return new Intl.NumberFormat('es-MX', {
+          style: 'currency',
+          currency: 'MXN',
+          minimumFractionDigits: 0
+        }).format(startingPrice);
       }
+      
       // Si no hay precio, mostrar información de subasta
       return null; // Retornamos null para manejarlo en el JSX
     },

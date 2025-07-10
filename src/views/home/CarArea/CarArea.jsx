@@ -110,34 +110,47 @@ export const CarArea = ({ scope = 'main' }) => {
                       <li><i className="far fa-road"></i>{carAreaHelpers.getCarEfficiency(car)}</li>
                       <li><i className="far fa-steering-wheel"></i>{carAreaHelpers.getCarTransmission(car)}</li>
                     </ul>
-                    <div className="car-footer d-flex align-items-center justify-content-between">
-                      <div className="car-price-section">
+                    <div className="car-footer d-flex flex-column align-items-start">
+                      {/* Precio / Puja actual */}
+                      <div className="car-price-section mb-2">
                         {carAreaHelpers.formatPrice(car.precio, car) ? (
                           <span className="car-price">
                             {carAreaHelpers.formatPrice(car.precio, car)} 
-                            <sub>{carAreaData.labels.perMonth}</sub>
+                            <sub className="ms-1">{carAreaData.labels.perMonth}</sub>
                           </span>
                         ) : (
-                          // Si no hay precio, mostrar cuenta regresiva o estado
-                          carAreaHelpers.getAuctionEndDate(car) ? (
-                            carAreaHelpers.isAuctionActive(car) ? (
+                          <span className="text-muted">Precio no disponible</span>
+                        )}
+                      </div>
+                      
+                      {/* Countdown / Estado de subasta */}
+                      <div className="car-auction-status mb-2">
+                        {carAreaHelpers.getAuctionEndDate(car) ? (
+                          carAreaHelpers.isAuctionActive(car) ? (
+                            <span className="auction-timer-wrapper">
+                              <span className="text-muted me-1">{carAreaData.defaults.price}</span>
                               <AuctionTimer 
                                 endDate={carAreaHelpers.getAuctionEndDate(car)} 
                                 displayMode="inline"
                               />
-                            ) : (
-                              <span className="text-muted">
-                                <i className="far fa-clock me-1"></i>
-                                Finalizado
-                              </span>
-                            )
+                            </span>
                           ) : (
-                            <span className="text-muted">Sin información</span>
+                            <span className="text-muted">
+                              <i className="far fa-clock me-1"></i>
+                              Finalizado
+                            </span>
                           )
+                        ) : (
+                          <span className="text-muted">
+                            <i className="far fa-clock me-1"></i>
+                            Sin fecha límite
+                          </span>
                         )}
                       </div>
-                      <div className="car-actions d-flex align-items-center gap-2">
-                        <a href={carAreaHelpers.getCarLink(car)} className="theme-btn btn btn-primary btn-sm">
+                      
+                      {/* Botón de acción */}
+                      <div className="car-actions w-100">
+                        <a href={carAreaHelpers.getCarLink(car)} className="theme-btn btn btn-primary btn-sm w-100">
                           {carAreaData.labels.rentNow}
                         </a>
                       </div>
